@@ -111,11 +111,15 @@ class UnbondingDelegationEntry(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> UnbondingDelegationEntry:
+       
+        # The date needs to be formatted as a string. Add extra timezone details if required
+        date:str = parser.parse(data['completion_time']).strftime('%Y-%m-%d %H-%M-%S')
+        
         return cls(
             initial_balance=data["initial_balance"],
             balance=data["balance"],
             creation_height=data["creation_height"],
-            completion_time=parser.parse(data["completion_time"]),
+            completion_time=date
         )
 
     def to_proto(self) -> UnbondingDelegationEntry_pb:

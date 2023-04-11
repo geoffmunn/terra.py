@@ -93,9 +93,13 @@ class Commission(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> Commission:
+        
+        # The date needs to be formatted as a string. Add extra timezone details if required
+        date:str = parser.parse(data['update_time']).strftime('%Y-%m-%d %H-%M-%S')
+        
         return cls(
             commission_rates=CommissionRates.from_data(data["commission_rates"]),
-            update_time=parser.parse(data["update_time"]),
+            update_time=date
         )
 
     def to_proto(self) -> Commission_pb:

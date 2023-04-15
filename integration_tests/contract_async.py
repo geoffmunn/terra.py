@@ -1,10 +1,10 @@
 import asyncio
 from pathlib import Path
 
-from terra_sdk.client.localterra import AsyncLocalTerra
-from terra_sdk.core import Coins, Fee
-from terra_sdk.core.wasm import MsgExecuteContract, MsgInstantiateContract, MsgStoreCode
-from terra_sdk.util.contract import get_code_id, get_contract_address, read_file_as_b64
+from terra-classic_sdk.client.localterra import AsyncLocalTerra
+from terra-classic_sdk.core import Coins, Fee
+from terra-classic_sdk.core.wasm import MsgExecuteContract, MsgInstantiateContract, MsgStoreCode
+from terra-classic_sdk.util.contract import get_code_id, get_contract_address, read_file_as_b64
 
 
 async def async_main():

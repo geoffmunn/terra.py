@@ -1,4 +1,4 @@
-from terra_sdk.client.lcd import LCDClient, PaginationOptions
+from terra-classic_sdk.client.lcd import LCDClient, PaginationOptions
 
 terra = LCDClient(
     url="https://bombay-lcd.terra.dev/",

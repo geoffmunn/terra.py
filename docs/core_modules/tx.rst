@@ -4,17 +4,17 @@ Transactions
 API
 ---
 
-.. autoclass:: terra_sdk.client.lcd.api.tx.TxAPI
+.. autoclass:: terra-classic_sdk.client.lcd.api.tx.TxAPI
     :members:
 
 Functions
 ---------
 
-.. autofunction:: terra_sdk.core.broadcast.is_tx_error
+.. autofunction:: terra-classic_sdk.core.broadcast.is_tx_error
 
 Data
 ----
 
-.. automodule:: terra_sdk.core.broadcast
+.. automodule:: terra-classic_sdk.core.broadcast
     :members:
     :exclude-members: is_tx_error

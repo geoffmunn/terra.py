@@ -4,5 +4,5 @@ Params
 Proposals
 ---------
 
-.. automodule:: terra_sdk.core.params.proposals
+.. automodule:: terra-classic_sdk.core.params.proposals
     :members:

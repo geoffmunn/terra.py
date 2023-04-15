@@ -17,16 +17,16 @@ import lcd_ibc_transfer
 """
 
 
-from terra_sdk.client.lcd import LCDClient
-from terra_sdk.client.lcd.api.tx import CreateTxOptions, SignerOptions
+from terra-classic_sdk.client.lcd import LCDClient
+from terra-classic_sdk.client.lcd.api.tx import CreateTxOptions, SignerOptions
 
 # import lcd_tx
-from terra_sdk.client.localterra import LocalTerra
-from terra_sdk.core import Coin, Coins
-from terra_sdk.core.bank import MsgSend
-from terra_sdk.core.tx import SignMode
-from terra_sdk.key.key import SignOptions
-from terra_sdk.key.mnemonic import MnemonicKey
+from terra-classic_sdk.client.localterra import LocalTerra
+from terra-classic_sdk.core import Coin, Coins
+from terra-classic_sdk.core.bank import MsgSend
+from terra-classic_sdk.core.tx import SignMode
+from terra-classic_sdk.key.key import SignOptions
+from terra-classic_sdk.key.mnemonic import MnemonicKey
 
 
 def main():

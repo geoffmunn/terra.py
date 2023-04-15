@@ -2,11 +2,11 @@ import asyncio
 
 import uvloop
 
-from terra_sdk.client.lcd import AsyncLCDClient
-from terra_sdk.client.lcd.api.tx import CreateTxOptions
-from terra_sdk.core import Coins
-from terra_sdk.core.bank import MsgSend
-from terra_sdk.key.mnemonic import MnemonicKey
+from terra-classic_sdk.client.lcd import AsyncLCDClient
+from terra-classic_sdk.client.lcd.api.tx import CreateTxOptions
+from terra-classic_sdk.core import Coins
+from terra-classic_sdk.core.bank import MsgSend
+from terra-classic_sdk.key.mnemonic import MnemonicKey
 
 
 async def with_sem(aw, sem):

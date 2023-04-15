@@ -1,4 +1,4 @@
-from terra_sdk.client.lcd import LCDClient
+from terra-classic_sdk.client.lcd import LCDClient
 
 terra = LCDClient(
     url="https://bombay-lcd.terra.dev/",

@@ -13,7 +13,7 @@ You can replace your LCDClient instance with AsyncLCDClient inside a coroutine f
     :emphasize-lines: 5,8
 
     import asyncio 
-    from terra_sdk.client.lcd import AsyncLCDClient
+    from terra-classic_sdk.client.lcd import AsyncLCDClient
 
     async def main():
         terra = AsyncLCDClient("https://lcd.terra.dev", "columbus-5")
@@ -31,7 +31,7 @@ session. Here's the same code as above, this time using the ``async with`` const
     :emphasize-lines: 5
 
     import asyncio 
-    from terra_sdk.client.lcd import AsyncLCDClient
+    from terra-classic_sdk.client.lcd import AsyncLCDClient
 
     async def main():
         async with AsyncLCDClient("https://lcd.terra.dev", "columbus-5") as terra:
@@ -50,10 +50,10 @@ are also asychronous and therefore must be awaited.
     :emphasize-lines: 12-13
 
     import asyncio
-    from terra_sdk.client.lcd.api.tx import CreateTxOptions
-    from terra_sdk.client.lcd import AsyncLCDClient
-    from terra_sdk.key.mnemonic import MnemonicKey
-    from terra_sdk.core import Coins
+    from terra-classic_sdk.client.lcd.api.tx import CreateTxOptions
+    from terra-classic_sdk.client.lcd import AsyncLCDClient
+    from terra-classic_sdk.key.mnemonic import MnemonicKey
+    from terra-classic_sdk.core import Coins
 
     mk = MnemonicKey()
     recipient = "terra1..."
@@ -82,7 +82,7 @@ for more performance. For example:
     import asyncio
     import uvloop
 
-    from terra_sdk.client.lcd import AsyncLCDClient
+    from terra-classic_sdk.client.lcd import AsyncLCDClient
 
     async def main():
         async with AsyncLCDClient("https://lcd.terra.dev", "columbus-5") as terra:

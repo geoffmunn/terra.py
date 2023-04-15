@@ -4,11 +4,11 @@ Slashing
 API
 ---
 
-.. autoclass:: terra_sdk.client.lcd.api.slashing.SlashingAPI
+.. autoclass:: terra-classic_sdk.client.lcd.api.slashing.SlashingAPI
     :members: 
 
 Messages
 --------
 
-.. automodule:: terra_sdk.core.slashing.msgs
+.. automodule:: terra-classic_sdk.core.slashing.msgs
     :members:

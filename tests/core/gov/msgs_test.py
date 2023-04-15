@@ -1,4 +1,4 @@
-from terra_sdk.core.gov import MsgDeposit, MsgSubmitProposal
+from terra-classic_sdk.core.gov import MsgDeposit, MsgSubmitProposal
 
 
 def test_deserializes_msg_deposit_examples(load_msg_examples):

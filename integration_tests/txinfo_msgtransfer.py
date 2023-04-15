@@ -1,4 +1,4 @@
-from terra_sdk.client.lcd import LCDClient
+from terra-classic_sdk.client.lcd import LCDClient
 
 if __name__ == "__main__":
     client = LCDClient(url="https://lcd.terra.dev", chain_id="columbus-5")

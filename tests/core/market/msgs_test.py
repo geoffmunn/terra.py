@@ -1,4 +1,4 @@
-from terra_sdk.core.market import MsgSwap, MsgSwapSend
+from terra-classic_sdk.core.market import MsgSwap, MsgSwapSend
 
 
 def test_deserializes_msg_swap_examples(load_msg_examples):

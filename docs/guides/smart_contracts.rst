@@ -9,10 +9,10 @@ Contract Deployment Example
 .. code-block:: python
 
     import base64
-    from terra_sdk.client.lcd.api.tx import CreateTxOptions
-    from terra_sdk.client.localterra import LocalTerra
-    from terra_sdk.core.wasm import MsgStoreCode, MsgInstantiateContract, MsgExecuteContract    
-    from terra_sdk.core.fee import Fee
+    from terra-classic_sdk.client.lcd.api.tx import CreateTxOptions
+    from terra-classic_sdk.client.localterra import LocalTerra
+    from terra-classic_sdk.core.wasm import MsgStoreCode, MsgInstantiateContract, MsgExecuteContract    
+    from terra-classic_sdk.core.fee import Fee
     
     terra = LocalTerra()
     test1 = terra.wallets["test1"]

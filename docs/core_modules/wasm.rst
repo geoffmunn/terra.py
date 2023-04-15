@@ -4,11 +4,11 @@ WebAssembly
 API
 ---
 
-.. autoclass:: terra_sdk.client.lcd.api.wasm.WasmAPI
+.. autoclass:: terra-classic_sdk.client.lcd.api.wasm.WasmAPI
     :members: 
 
 Messages
 --------
 
-.. automodule:: terra_sdk.core.wasm.msgs
+.. automodule:: terra-classic_sdk.core.wasm.msgs
     :members:

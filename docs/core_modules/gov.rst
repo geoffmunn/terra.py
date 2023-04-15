@@ -4,23 +4,23 @@ Gov
 API
 ---
 
-.. autoclass:: terra_sdk.client.lcd.api.gov.GovAPI
+.. autoclass:: terra-classic_sdk.client.lcd.api.gov.GovAPI
     :members: 
 
 Data
 ----
 
-.. automodule:: terra_sdk.core.gov.data
+.. automodule:: terra-classic_sdk.core.gov.data
     :members:
 
 Messages
 --------
 
-.. automodule:: terra_sdk.core.gov.msgs
+.. automodule:: terra-classic_sdk.core.gov.msgs
     :members:
 
 Proposals
 ---------
 
-.. automodule:: terra_sdk.core.gov.proposals
+.. automodule:: terra-classic_sdk.core.gov.proposals
     :members:

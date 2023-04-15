@@ -1,4 +1,4 @@
-from terra_sdk.core.oracle import MsgAggregateExchangeRateVote, MsgDelegateFeedConsent
+from terra-classic_sdk.core.oracle import MsgAggregateExchangeRateVote, MsgDelegateFeedConsent
 
 
 def test_deserializes_msg_delegate_feed_consent_examples(load_msg_examples):

@@ -1,9 +1,9 @@
 import base64
 
-from terra_sdk.client.lcd.api.tx import CreateTxOptions
-from terra_sdk.client.localterra import LocalTerra
-from terra_sdk.core import Coin, Coins, ValConsPubKey
-from terra_sdk.core.staking import (
+from terra-classic_sdk.client.lcd.api.tx import CreateTxOptions
+from terra-classic_sdk.client.localterra import LocalTerra
+from terra-classic_sdk.core import Coin, Coins, ValConsPubKey
+from terra-classic_sdk.core.staking import (
     CommissionRates,
     Description,
     MsgBeginRedelegate,

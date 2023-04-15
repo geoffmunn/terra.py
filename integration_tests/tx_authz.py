@@ -1,6 +1,6 @@
-from terra_sdk.client.lcd.api.tx import CreateTxOptions
-from terra_sdk.client.localterra import LocalTerra
-from terra_sdk.core.authz import (
+from terra-classic_sdk.client.lcd.api.tx import CreateTxOptions
+from terra-classic_sdk.client.localterra import LocalTerra
+from terra-classic_sdk.core.authz import (
     MsgExecAuthorized,
     MsgGrantAuthorization,
     MsgRevokeAuthorization,

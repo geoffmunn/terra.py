@@ -1,4 +1,4 @@
-from terra-classic_sdk.client.lcd import LCDClient
+from terra_classic_sdk.client.lcd import LCDClient
 
 
 def main():

@@ -3,7 +3,7 @@
 Numeric Types
 =============
 
-.. autoclass:: terra-classic_sdk.core.numeric.Numeric
+.. autoclass:: terra_classic_sdk.core.numeric.Numeric
     :members:
 
 Integers
@@ -21,5 +21,5 @@ The Python's ``int`` provides support for BigNumber implementation for artihmeti
 Decimals
 --------
 
-.. autoclass:: terra-classic_sdk.core.Dec
+.. autoclass:: terra_classic_sdk.core.Dec
     :members:

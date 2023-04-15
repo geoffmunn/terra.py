@@ -14,12 +14,12 @@ classifiers = [
 description = "The Python SDK for Terra Classic"
 documentation = "https://terra-money.github.io/terra.py/index.html"
 homepage = "https://github.com/geoffmunn/terra.py"
-keywords = ["jigu", "blockchain", "terra", "terra-classic", "lunc" "defi", "crypto"]
+keywords = ["jigu", "blockchain", "terra", "terra classic", "lunc", "defi", "crypto"]
 license = "MIT"
-packages = [{ include = "terra-classic_sdk" }]
+packages = [{ include = "terra_classic_sdk" }]
 readme = "README.md"
 repository = "https://github.com/terra-money/terra.py"
-version = "2.0.6"
+version = "2.0.7"
 
 [tool.poetry.dependencies]
 aiohttp = "^3.8.1"

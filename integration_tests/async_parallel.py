@@ -2,7 +2,7 @@ import asyncio
 
 import uvloop
 
-from terra-classic_sdk.client.lcd import AsyncLCDClient
+from terra_classic_sdk.client.lcd import AsyncLCDClient
 
 
 async def with_sem(aw, sem):

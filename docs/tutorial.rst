@@ -33,7 +33,7 @@ This can be done through setting up an LCDClient:
 
 .. code-block:: python
 
-    from terra-classic_sdk.client.lcd import LCDClient
+    from terra_classic_sdk.client.lcd import LCDClient
 
     terra = LCDClient(chain_id="columbus-5", url="https://lcd.terra.dev")
     print(terra.tendermint.node_info())

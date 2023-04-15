@@ -1,4 +1,4 @@
-from terra-classic_sdk.core import Tx
+from terra_classic_sdk.core import Tx
 
 
 def test_deserializes_tx(load_json_examples):

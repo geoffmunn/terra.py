@@ -1,4 +1,4 @@
-from terra-classic_sdk.core.auth import Account, LazyGradedVestingAccount
+from terra_classic_sdk.core.auth import Account, LazyGradedVestingAccount
 
 
 def test_deserializes_account_example(load_json_examples):

@@ -5,7 +5,7 @@ If you want to perform a state-changing operation on the Terra blockchain such a
 sending tokens, swapping assets, withdrawing rewards, or even invoking functions on
 smart contracts, you must create a **transaction** and broadcast it to the network.
 
-An :class:`StdTx<terra-classic_sdk.core.tx.Tx>` is a data object that represents
+An :class:`StdTx<terra_classic_sdk.core.tx.Tx>` is a data object that represents
 a transaction. It contains:
 
 - **msgs**: a list of state-altering messages
@@ -22,16 +22,16 @@ Using a Wallet (recommended)
     This method requires an LCDClient instance with a proper node connection. If you
     can't use Wallet, see `Signing transactions manually`_.
 
-A :class:`Wallet<terra-classic_sdk.client.lcd.wallet.Wallet>` allows you to create and sign a transaction in a single step by automatically
+A :class:`Wallet<terra_classic_sdk.client.lcd.wallet.Wallet>` allows you to create and sign a transaction in a single step by automatically
 fetching the latest information from the blockchain (chain ID, account number, sequence).
 
-Use :meth:`LCDClient.wallet()<terra-classic_sdk.client.lcd.LCDClient.wallet>` to create a Wallet from any Key instance. The Key provided should
+Use :meth:`LCDClient.wallet()<terra_classic_sdk.client.lcd.LCDClient.wallet>` to create a Wallet from any Key instance. The Key provided should
 correspond to the account you intend to sign the transaction with.
 
 .. code-block:: python
 
-    from terra-classic_sdk.client.lcd import LCDClient
-    from terra-classic_sdk.key.mnemonic import MnemonicKey
+    from terra_classic_sdk.client.lcd import LCDClient
+    from terra_classic_sdk.key.mnemonic import MnemonicKey
 
     mk = MnemonicKey(mnemonic=MNEMONIC) 
     terra = LCDClient("https://lcd.terra.dev", "columbus-5")
@@ -42,9 +42,9 @@ Once you have your Wallet, you can simply create a StdTx using :meth:`Wallet.cre
 
 .. code-block:: python
 
-    from terra-classic_sdk.client.lcd.api.tx import CreateTxOptions
-    from terra-classic_sdk.core.fee import Fee
-    from terra-classic_sdk.core.bank import MsgSend
+    from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions
+    from terra_classic_sdk.core.fee import Fee
+    from terra_classic_sdk.core.bank import MsgSend
 
     tx = wallet.create_and_sign_tx(
         CreateTxOptions(
@@ -69,7 +69,7 @@ And that's it! You should now be able to broadcast your transaction to the netwo
 Automatic fee estimation
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-If no ``fee`` parameter is provided for :meth:`Wallet.create_and_sign_tx()<terra-classic_sdk.client.lcd.wallet.Wallet.create_and_sign_tx>`,
+If no ``fee`` parameter is provided for :meth:`Wallet.create_and_sign_tx()<terra_classic_sdk.client.lcd.wallet.Wallet.create_and_sign_tx>`,
 the transaction fee will be simulated against the node and populated for you. By default, ``Wallet``
 will use the fee estimation parameters of the ``LCDClient`` used to create it. You can override
 this behavior **per transaction**:
@@ -105,7 +105,7 @@ Signing transactions manually
 -----------------------------
 
 Below is the full process of signing a transaction manually that does not use ``Wallet``.
-You will need to build a :class:`SignDoc<terra-classic_sdk.core.sign_doc.SignDoc>`,
+You will need to build a :class:`SignDoc<terra_classic_sdk.core.sign_doc.SignDoc>`,
 sign it, and add the signatures to an ``Tx``.
 
 A SignDoc contains the information required to build a StdTx:
@@ -118,13 +118,13 @@ A SignDoc contains the information required to build a StdTx:
 
 .. code-block:: python
 
-    from terra-classic_sdk.client.lcd.api.tx import CreateTxOptions, SignerOptions
-    from terra-classic_sdk.client.lcd import LCDClient
-    from terra-classic_sdk.core.bank import MsgSend
-    from terra-classic_sdk.core.tx import SignMode
-    from terra-classic_sdk.key.key import SignOptions
-    from terra-classic_sdk.key.mnemonic import MnemonicKey
-    from terra-classic_sdk.core import Coin, Coins
+    from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions, SignerOptions
+    from terra_classic_sdk.client.lcd import LCDClient
+    from terra_classic_sdk.core.bank import MsgSend
+    from terra_classic_sdk.core.tx import SignMode
+    from terra_classic_sdk.key.key import SignOptions
+    from terra_classic_sdk.key.mnemonic import MnemonicKey
+    from terra_classic_sdk.core import Coin, Coins
 
     terra = LCDClient("https://lcd.terra.dev", "columbus-5")
     key = MnemonicKey(mnemonic=MNEMONIC)
@@ -167,7 +167,7 @@ Applying multiple signatures
 
 Some messages, such as ``MsgMultiSend``, require the transaction to be signed with multiple signatures.
 You must prepare a separate ``SignDoc`` for each signer to sign individually, and then
-combine them in the ``signatures`` field of the final :class:`StdTx<terra-classic_sdk.core..tx.Tx>` object. 
+combine them in the ``signatures`` field of the final :class:`StdTx<terra_classic_sdk.core..tx.Tx>` object. 
 Each ``SignDoc`` should only differ by ``account`` and ``sequence``, which vary according to the signing key.
 
 .. note::
@@ -176,11 +176,11 @@ Each ``SignDoc`` should only differ by ``account`` and ``sequence``, which vary 
 
 .. code-block:: python
 
-    from terra-classic_sdk.client.lcd import LCDClient
-    from terra-classic_sdk.core.fee import Fee
-    from terra-classic_sdk.core.bank import MsgMultiSend
-    from terra-classic_sdk.key.mnemonic import MnemonicKey
-    from terra-classic_sdk.core.bank import MsgMultiSend, MultiSendInput, MultiSendOutput
+    from terra_classic_sdk.client.lcd import LCDClient
+    from terra_classic_sdk.core.fee import Fee
+    from terra_classic_sdk.core.bank import MsgMultiSend
+    from terra_classic_sdk.key.mnemonic import MnemonicKey
+    from terra_classic_sdk.core.bank import MsgMultiSend, MultiSendInput, MultiSendOutput
 
     terra = LCDClient("https://lcd.terra.dev", "columbus-5")
     wallet1 = terra.wallet(MnemonicKey(mnemonic=MNEMONIC_1))

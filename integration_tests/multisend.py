@@ -16,15 +16,15 @@ import lcd_ibc_transfer
 
 """
 
-from terra-classic_sdk.client.lcd import LCDClient
+from terra_classic_sdk.client.lcd import LCDClient
 
 # import lcd_tx
-from terra-classic_sdk.client.lcd.api.tx import CreateTxOptions
-from terra-classic_sdk.client.localterra import LocalTerra
-from terra-classic_sdk.core.bank import MsgMultiSend, MsgSend, MultiSendInput, MultiSendOutput
-from terra-classic_sdk.core.tx import SignMode
-from terra-classic_sdk.key.mnemonic import MnemonicKey
-from terra-classic_sdk.util.json import JSONSerializable
+from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions
+from terra_classic_sdk.client.localterra import LocalTerra
+from terra_classic_sdk.core.bank import MsgMultiSend, MsgSend, MultiSendInput, MultiSendOutput
+from terra_classic_sdk.core.tx import SignMode
+from terra_classic_sdk.key.mnemonic import MnemonicKey
+from terra_classic_sdk.util.json import JSONSerializable
 
 """ untested
 import lcd_gov
@@ -32,8 +32,8 @@ import lcd_gov
 
 ########
 
-from terra-classic_sdk.core import Coin, Coins
-from terra-classic_sdk.core.public_key import SimplePublicKey
+from terra_classic_sdk.core import Coin, Coins
+from terra_classic_sdk.core.public_key import SimplePublicKey
 
 
 def main():

@@ -1,11 +1,11 @@
-from terra-classic_sdk.client.lcd import LCDClient, PaginationOptions
-from terra-classic_sdk.client.lcd.api.tx import CreateTxOptions
-from terra-classic_sdk.core import Coin, Coins
-from terra-classic_sdk.core.ibc import Height
-from terra-classic_sdk.core.ibc_transfer import MsgTransfer
-from terra-classic_sdk.exceptions import LCDResponseError
-from terra-classic_sdk.key.mnemonic import MnemonicKey
-from terra-classic_sdk.util.contract import get_code_id
+from terra_classic_sdk.client.lcd import LCDClient, PaginationOptions
+from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions
+from terra_classic_sdk.core import Coin, Coins
+from terra_classic_sdk.core.ibc import Height
+from terra_classic_sdk.core.ibc_transfer import MsgTransfer
+from terra_classic_sdk.exceptions import LCDResponseError
+from terra_classic_sdk.key.mnemonic import MnemonicKey
+from terra_classic_sdk.util.contract import get_code_id
 
 
 def main():

@@ -1,12 +1,12 @@
 Auth
 ====
 
-.. note:: Data objects are also aliased under at ``terra-classic_sdk.core.auth``.
+.. note:: Data objects are also aliased under at ``terra_classic_sdk.core.auth``.
 
 API
 --------
 
-.. autoclass:: terra-classic_sdk.client.lcd.api.auth.AuthAPI
+.. autoclass:: terra_classic_sdk.client.lcd.api.auth.AuthAPI
     :members:
 
 
@@ -16,17 +16,17 @@ Data
 Account
 ^^^^^^^
 
-.. automodule:: terra-classic_sdk.core.auth.data.account
+.. automodule:: terra_classic_sdk.core.auth.data.account
     :members:
 
 Transactions
 ^^^^^^^^^^^^
 
-.. automodule:: terra-classic_sdk.core.tx
+.. automodule:: terra_classic_sdk.core.tx
     :members:
 
 Public Key
 ^^^^^^^^^^
 
-.. automodule:: terra-classic_sdk.core.public_key
+.. automodule:: terra_classic_sdk.core.public_key
     :members:

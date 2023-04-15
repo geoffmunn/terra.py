@@ -1,7 +1,7 @@
 import asynctest
 from aioresponses import aioresponses
 
-from terra-classic_sdk.client.lcd import AsyncLCDClient, LCDClient
+from terra_classic_sdk.client.lcd import AsyncLCDClient, LCDClient
 
 """
 class TestDoSessionGet(asynctest.TestCase):

@@ -1,5 +1,5 @@
-from terra-classic_sdk.client.lcd import LCDClient
-from terra-classic_sdk.core.bech32 import is_acc_address
+from terra_classic_sdk.client.lcd import LCDClient
+from terra_classic_sdk.core.bech32 import is_acc_address
 
 terra = LCDClient(
     url="https://bombay-lcd.terra.dev/",

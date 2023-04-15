@@ -1,4 +1,4 @@
-from terra-classic_sdk.core.staking import Validator
+from terra_classic_sdk.core.staking import Validator
 
 
 def test_deserializes():

@@ -73,7 +73,7 @@ Terra SDK requires <a href="https://www.python.org/downloads/">Python v3.7+</a>.
 Terra SDK can be installed (preferably in a `virtual environment` from PyPI using `pip`) as follows:
 
 ```
-$ pip install -U terra-classic_sdk
+$ pip install -U terra_classic_sdk
 ```
 
 <sub>_You might have `pip3` installed instead of `pip`; proceed according to your own setup._<sub>
@@ -113,7 +113,7 @@ The following examples are provided to help you get started. Use cases and funct
 In order to interact with the Terra blockchain, you'll need a connection to a Terra node. This can be done through setting up an LCDClient (The LCDClient is an object representing an HTTP connection to a Terra LCD node.):
 
 ```
->>> from terra-classic_sdk.client.lcd import LCDClient
+>>> from terra_classic_sdk.client.lcd import LCDClient
 >>> terra = LCDClient(chain_id="columbus-5", url="https://lcd.terra.dev")
 ```
 
@@ -133,7 +133,7 @@ If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLC
 
 <pre><code>
 >>> import asyncio 
->>> from terra-classic_sdk.client.lcd import AsyncLCDClient
+>>> from terra_classic_sdk.client.lcd import AsyncLCDClient
 
 >>> async def main():
       <strong>terra = AsyncLCDClient("https://lcd.terra.dev", "columbus-5")</strong>
@@ -158,8 +158,8 @@ Use `LCDClient.wallet()` to create a Wallet from any Key instance. The Key provi
 <sub>**NOTE:** *If you are using MacOS and got an exception 'bad key length' from MnemonicKey, please check your python implementation. if `python3 -c "import ssl; print(ssl.OPENSSL_VERSION)"` returns LibreSSL 2.8.3, you need to reinstall python via pyenv or homebrew.*</sub>
 
 ```
->>> from terra-classic_sdk.client.lcd import LCDClient
->>> from terra-classic_sdk.key.mnemonic import MnemonicKey
+>>> from terra_classic_sdk.client.lcd import LCDClient
+>>> from terra_classic_sdk.key.mnemonic import MnemonicKey
 
 >>> mk = MnemonicKey(mnemonic=MNEMONIC)
 >>> terra = LCDClient("https://lcd.terra.dev", "columbus-5")
@@ -169,9 +169,9 @@ Use `LCDClient.wallet()` to create a Wallet from any Key instance. The Key provi
 Once you have your Wallet, you can simply create a StdTx using `Wallet.create_and_sign_tx`.
 
 ```
->>> from terra-classic_sdk.core.fee import Fee
->>> from terra-classic_sdk.core.bank import MsgSend
->>> from terra-classic_sdk.client.lcd.api.tx import CreateTxOptions
+>>> from terra_classic_sdk.core.fee import Fee
+>>> from terra_classic_sdk.core.bank import MsgSend
+>>> from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions
 
 >>> tx = wallet.create_and_sign_tx(CreateTxOptions(
         msgs=[MsgSend(

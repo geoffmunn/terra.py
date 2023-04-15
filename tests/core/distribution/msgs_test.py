@@ -1,4 +1,4 @@
-from terra-classic_sdk.core.distribution import (
+from terra_classic_sdk.core.distribution import (
     MsgSetWithdrawAddress,
     MsgWithdrawDelegatorReward,
     MsgWithdrawValidatorCommission,

@@ -1,4 +1,4 @@
-from terra-classic_sdk.core import Dec
+from terra_classic_sdk.core import Dec
 from decimal import Decimal
 import pytest
 

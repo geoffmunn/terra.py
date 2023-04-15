@@ -1,4 +1,4 @@
-from terra-classic_sdk.core.staking import MsgBeginRedelegate, MsgDelegate, MsgUndelegate
+from terra_classic_sdk.core.staking import MsgBeginRedelegate, MsgDelegate, MsgUndelegate
 
 
 def test_deserialize_msg_delegate_examples(load_msg_examples):

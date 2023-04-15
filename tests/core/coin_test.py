@@ -1,6 +1,6 @@
 import pytest
 
-from terra-classic_sdk.core import Coin, Dec
+from terra_classic_sdk.core import Coin, Dec
 
 
 def test_multiple_amount_types():

@@ -2,12 +2,12 @@ import asyncio
 import base64
 from pathlib import Path
 
-from terra-classic_sdk.client.lcd import LCDClient
-from terra-classic_sdk.client.lcd.api.tx import CreateTxOptions
-from terra-classic_sdk.core import Coins
-from terra-classic_sdk.core.bank import MsgSend
-from terra-classic_sdk.core.tx import SignMode
-from terra-classic_sdk.key.mnemonic import MnemonicKey
+from terra_classic_sdk.client.lcd import LCDClient
+from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions
+from terra_classic_sdk.core import Coins
+from terra_classic_sdk.core.bank import MsgSend
+from terra_classic_sdk.core.tx import SignMode
+from terra_classic_sdk.key.mnemonic import MnemonicKey
 
 
 def main():

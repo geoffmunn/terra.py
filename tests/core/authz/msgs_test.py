@@ -1,4 +1,4 @@
-from terra-classic_sdk.core.authz import (
+from terra_classic_sdk.core.authz import (
     MsgExecAuthorized,
     MsgGrantAuthorization,
     MsgRevokeAuthorization,

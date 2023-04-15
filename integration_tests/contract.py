@@ -1,11 +1,11 @@
 from pathlib import Path
 
-from terra-classic_sdk.client.lcd.api.tx import CreateTxOptions
-from terra-classic_sdk.client.localterra import LocalTerra
-from terra-classic_sdk.core import Coins
-from terra-classic_sdk.core.fee import Fee
-from terra-classic_sdk.core.wasm import MsgExecuteContract, MsgInstantiateContract, MsgStoreCode
-from terra-classic_sdk.util.contract import get_code_id, get_contract_address, read_file_as_b64
+from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions
+from terra_classic_sdk.client.localterra import LocalTerra
+from terra_classic_sdk.core import Coins
+from terra_classic_sdk.core.fee import Fee
+from terra_classic_sdk.core.wasm import MsgExecuteContract, MsgInstantiateContract, MsgStoreCode
+from terra_classic_sdk.util.contract import get_code_id, get_contract_address, read_file_as_b64
 
 
 def main():

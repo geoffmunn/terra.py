@@ -1,5 +1,5 @@
 Exceptions
 ==========
 
-.. automodule:: terra-classic_sdk.exceptions
+.. automodule:: terra_classic_sdk.exceptions
     :members:

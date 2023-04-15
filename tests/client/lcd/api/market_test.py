@@ -1,5 +1,5 @@
-from terra-classic_sdk.client.lcd import LCDClient
-from terra-classic_sdk.core import Coin
+from terra_classic_sdk.client.lcd import LCDClient
+from terra_classic_sdk.core import Coin
 
 terra = LCDClient(
     url="https://bombay-lcd.terra.dev/",

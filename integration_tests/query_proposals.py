@@ -1,5 +1,5 @@
-from terra-classic_sdk.client.lcd import LCDClient, PaginationOptions
-from terra-classic_sdk.client.lcd.api.gov import ProposalStatus
+from terra_classic_sdk.client.lcd import LCDClient, PaginationOptions
+from terra_classic_sdk.client.lcd.api.gov import ProposalStatus
 
 terra = LCDClient(
     url="https://lcd.terra.dev/",

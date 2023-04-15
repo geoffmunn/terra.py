@@ -6,10 +6,10 @@ You can query information with Pagination to get information partially.
 PaginationOption
 ----------------
 
-.. autoclass:: terra-classic_sdk.client.lcd.params.APIParams
+.. autoclass:: terra_classic_sdk.client.lcd.params.APIParams
     :members:
 
-.. autoclass:: terra-classic_sdk.client.lcd.params.PaginationOptions
+.. autoclass:: terra_classic_sdk.client.lcd.params.PaginationOptions
     :members:
 
 You can use PaginationOptions as APIParams for params of query functions.
@@ -17,7 +17,7 @@ You can use PaginationOptions as APIParams for params of query functions.
 .. code-block:: python
     :emphasize-lines: 5,8
 
-    from terra-classic_sdk.client.lcd import LCDClient, PaginationOptions
+    from terra_classic_sdk.client.lcd import LCDClient, PaginationOptions
 
     terra = LCDClient(
         url="https://lcd.terra.dev/",

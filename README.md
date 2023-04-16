@@ -3,7 +3,7 @@
 
 <div  align="center"> <p > <img src="https://raw.githubusercontent.com/terra-money/terra-sdk-python/main/docs/img/logo.png" width=500 alt="py-sdk-logo"></p>
 
-The Python SDK for Terra
+The Python SDK for Terra Classic
 <br/>
 
 <p><sub>(Unfamiliar with Terra?  <a href="https://docs.terra.money/">Check out the Terra Docs</a>)</sub></p>
@@ -14,18 +14,18 @@ The Python SDK for Terra
 <p>
   <a href="https://terra-money.github.io/terra.py/index.html"><strong>Explore the Docs »</strong></a>
 <br/>
-  <a href="https://pypi.org/project/terra-sdk/">PyPI Package</a>
+  <a href="https://pypi.org/project/terra-classic-sdk/">PyPI Package</a>
   ·
-  <a href="https://github.com/terra-money/terra.py">GitHub Repository</a>
+  <a href="https://github.com/geoffmunn/terra.py">GitHub Repository</a>
 </p></div>
 
-The Terra Software Development Kit (SDK) in Python is a simple library toolkit for building software that can interact with the Terra blockchain and provides simple abstractions over core data structures, serialization, key management, and API request generation.
+The Terra Classic Software Development Kit (SDK) in Python is a simple library toolkit for building software that can interact with the Terra Classic blockchain and provides simple abstractions over core data structures, serialization, key management, and API request generation.
 
 ## Features
 
 - Written in Python with extensive support libraries
 - Versatile support for key management solutions
-- Exposes the Terra API through LCDClient
+- Exposes the Terra Classic API through LCDClient
 
 <br/>
 
@@ -64,7 +64,7 @@ A walk-through of the steps to get started with the Terra SDK alongside a few us
 
 ## Requirements
 
-Terra SDK requires <a href="https://www.python.org/downloads/">Python v3.7+</a>.
+Terra Classic SDK requires <a href="https://www.python.org/downloads/">Python v3.7+</a>.
 
 ## Installation
 
@@ -80,7 +80,7 @@ $ pip install -U terra_classic_sdk
 
 ## Dependencies
 
-Terra SDK uses <a href="https://python-poetry.org/">Poetry</a> to manage dependencies. To get set up with all the required dependencies, run:
+Terra Classic SDK uses <a href="https://python-poetry.org/">Poetry</a> to manage dependencies. To get set up with all the required dependencies, run:
 
 ```
 $ pip install poetry
@@ -89,7 +89,7 @@ $ poetry install
 
 ## Tests
 
-Terra SDK provides extensive tests for data classes and functions. To run them, after the steps in [Dependencies](#dependencies):
+Terra Classic SDK provides extensive tests for data classes and functions. To run them, after the steps in [Dependencies](#dependencies):
 
 ```
 $ make test

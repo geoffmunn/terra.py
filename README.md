@@ -76,7 +76,7 @@ Terra SDK can be installed (preferably in a `virtual environment` from PyPI usin
 $ pip install -U terra_classic_sdk
 ```
 
-<sub>_You might have `pip3` installed instead of `pip`; proceed according to your own setup._<sub>
+<sub>_You might need to run pip via ```python -m pip install -U terra_classic_sdk```. Additionally, you might have `pip3` installed instead of `pip`; proceed according to your own setup._<sub>
 
 ## Dependencies
 
@@ -97,7 +97,7 @@ $ make test
 
 ## Code Quality
 
-Terra SDK uses <a href="https://black.readthedocs.io/en/stable/">Black</a>, <a href="https://isort.readthedocs.io/en/latest/">isort</a>, and <a href="https://mypy.readthedocs.io/en/stable/index.html">Mypy</a> for checking code quality and maintaining style. To reformat, after the steps in [Dependencies](#dependencies):
+Terra Classic SDK uses <a href="https://black.readthedocs.io/en/stable/">Black</a>, <a href="https://isort.readthedocs.io/en/latest/">isort</a>, and <a href="https://mypy.readthedocs.io/en/stable/index.html">Mypy</a> for checking code quality and maintaining style. To reformat, after the steps in [Dependencies](#dependencies):
 
 ```
 $ make qa && make format
@@ -107,19 +107,19 @@ $ make qa && make format
 
 # Usage Examples
 
-Terra SDK can help you read block data, sign and send transactions, deploy and interact with contracts, and many more.
-The following examples are provided to help you get started. Use cases and functionalities of the Terra SDK are not limited to the following examples and can be found in full <a href="https://terra-money.github.io/terra.py/index.html">here</a>.
+Terra Classic SDK can help you read block data, sign and send transactions, deploy and interact with contracts, and many more.
+The following examples are provided to help you get started. Use cases and functionalities of the Terra Classic SDK are not limited to the following examples and can be found in full <a href="https://terra-money.github.io/terra.py/index.html">here</a>.
 
-In order to interact with the Terra blockchain, you'll need a connection to a Terra node. This can be done through setting up an LCDClient (The LCDClient is an object representing an HTTP connection to a Terra LCD node.):
+In order to interact with the Terra Classic blockchain, you'll need a connection to a Terra Classic node. This can be done through setting up an LCDClient (The LCDClient is an object representing an HTTP connection to a Terra Classic LCD node.):
 
 ```
 >>> from terra_classic_sdk.client.lcd import LCDClient
->>> terra = LCDClient(chain_id="columbus-5", url="https://lcd.terra.dev")
+>>> terra = LCDClient(chain_id="columbus-5", url="https://terra-classic-lcd.publicnode.com")
 ```
 
 ## Getting Blockchain Information
 
-Once properly configured, the `LCDClient` instance will allow you to interact with the Terra blockchain. Try getting the latest block height:
+Once properly configured, the `LCDClient` instance will allow you to interact with the Terra Classic blockchain. Try getting the latest block height:
 
 ```
 >>> terra.tendermint.block_info()['block']['header']['height']
@@ -136,7 +136,7 @@ If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLC
 >>> from terra_classic_sdk.client.lcd import AsyncLCDClient
 
 >>> async def main():
-      <strong>terra = AsyncLCDClient("https://lcd.terra.dev", "columbus-5")</strong>
+      <strong>terra = AsyncLCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5")</strong>
       total_supply = await terra.bank.total()
       print(total_supply)
       <strong>await terra.session.close # you must close the session</strong>
@@ -146,8 +146,8 @@ If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLC
 
 ## Building and Signing Transactions
 
-If you wish to perform a state-changing operation on the Terra blockchain such as sending tokens, swapping assets, withdrawing rewards, or even invoking functions on smart contracts, you must create a **transaction** and broadcast it to the network.
-Terra SDK provides functions that help create StdTx objects.
+If you wish to perform a state-changing operation on the Terra Classic blockchain such as sending tokens, swapping assets, withdrawing rewards, or even invoking functions on smart contracts, you must create a **transaction** and broadcast it to the network.
+Terra Classic SDK provides functions that help create StdTx objects.
 
 ### Example Using a Wallet (_recommended_)
 
@@ -162,7 +162,7 @@ Use `LCDClient.wallet()` to create a Wallet from any Key instance. The Key provi
 >>> from terra_classic_sdk.key.mnemonic import MnemonicKey
 
 >>> mk = MnemonicKey(mnemonic=MNEMONIC)
->>> terra = LCDClient("https://lcd.terra.dev", "columbus-5")
+>>> terra = LCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5")
 >>> wallet = terra.wallet(mk)
 ```
 

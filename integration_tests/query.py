@@ -10,7 +10,7 @@ from terra_classic_sdk.util.contract import get_code_id
 
 def main():
     terra = LCDClient(
-        url="https://bombay-lcd.terra.dev/",
+        url="https://terra-classic-lcd.publicnode.com/",
         chain_id="columbus-5",
     )
 

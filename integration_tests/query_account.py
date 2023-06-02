@@ -1,6 +1,6 @@
 from terra_classic_sdk.client.lcd import LCDClient
 
-terra = LCDClient(chain_id="bombay-12", url="https://bombay-lcd.terra.dev")
+terra = LCDClient(chain_id="columbus-5", url="https://terra-classic-lcd.publicnode.com")
 
 res = terra.auth.account_info(address="terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v")
 print(res)

@@ -12,8 +12,8 @@ from terra_classic_sdk.key.mnemonic import MnemonicKey
 
 def main():
     terra = LCDClient(
-        chain_id="bombay-12",
-        url="https://bombay-lcd.terra.dev/",
+        chain_id="columbus-5",
+        url="https://terra-classic-lcd.publicnode.com/",
     )
     key = MnemonicKey(
         mnemonic="notice oak worry limit wrap speak medal online prefer cluster roof addict wrist behave treat actual wasp year salad speed social layer crew genius"

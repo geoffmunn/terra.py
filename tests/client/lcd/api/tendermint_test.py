@@ -1,8 +1,8 @@
 from terra_classic_sdk.client.lcd import LCDClient
 
 terra = LCDClient(
-    url="https://bombay-lcd.terra.dev/",
-    chain_id="bombay-12",
+    url="https://terra-classic-lcd.publicnode.com/",
+    chain_id="columbus-5",
 )
 
 
@@ -18,7 +18,7 @@ def test_validator_set_with_height():
 
 def test_node_info():
     result = terra.tendermint.node_info()
-    assert result["default_node_info"]["network"] == "bombay-12"
+    assert result["default_node_info"]["network"] == "columbus-5"
 
 
 def test_block_info():

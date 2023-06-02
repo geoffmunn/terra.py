@@ -1,8 +1,8 @@
 from terra_classic_sdk.client.lcd import LCDClient
 
 terra = LCDClient(
-    chain_id="bombay-12",
-    url="https://bombay-lcd.terra.dev/",
+    chain_id="columbus-5",
+    url="https://terra-classic-lcd.publicnode.com/",
 )
 res = terra.tendermint.node_info()
 print(res)

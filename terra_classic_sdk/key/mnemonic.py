@@ -8,24 +8,21 @@ from .raw import RawKey
 __all__ = ["MnemonicKey"]
 
 coin_types = {
+    'axelar': 118,
     'cosmos': 118,
+    'emoney': 118,
+    'gravity': 118,
+    'inj': 118,
     'juno': 118,
     'kava': 459,
     'kujira': 118,
+    'omniflix': 118,
     'osmo': 118,
-    'terra': 330
+    'sif': 118,
+    'somm': 118,
+    'terra': 330,
+    'umee': 118
 }
-
-#     #'emoney': 'channel-5', # Not active
-#     #'sif': 'channel-7' # Not active
-#     #'inj': 'channel-17' # Not active
-#     #'axelar': 'channel-19', # Not active
-#     #'umee': 'channel-26', # Not active
-#     #'omniflix': 'channel-27', # Not active
-#     #'evmos': 'channel-51', # Not active
-#     #'gravity': 'channel-64' # Not active
-#     #'somm': 'channel-83', # Not active
-
 
 class MnemonicKey(RawKey):
     """A MnemonicKey derives a private key using a BIP39 mnemonic seed phrase, and provides key-derivation options based on the BIP44 HD path standard.

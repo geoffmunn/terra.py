@@ -8,20 +8,20 @@ from .raw import RawKey
 __all__ = ["MnemonicKey"]
 
 coin_types = {
-    'axelar': 118,
     'cosmos': 118,
-    'emoney': 118,
-    'gravity': 118,
-    'inj': 118,
     'juno': 118,
     'kava': 459,
     'kujira': 118,
-    'omniflix': 118,
     'osmo': 118,
-    'sif': 118,
-    'somm': 118,
     'terra': 330,
-    'umee': 118
+    'emoney': 118,
+    'sif': 118,
+    'inj': 60,     # Possibly wrong coin type
+    'axelar': 118,
+    'umee': 118,
+    'omniflix': 118,
+    'gravity': 118,
+    'somm': 118
 }
 
 class MnemonicKey(RawKey):

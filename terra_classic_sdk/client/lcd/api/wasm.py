@@ -56,16 +56,15 @@ class AsyncWasmAPI(BaseAsyncAPI):
         Returns:
             Any: results of query
         """
-        params = {
-            "query_msg": base64.b64encode(json.dumps(query).encode("utf-8")).decode(
-                "utf-8"
-            )
-        }
-        res = await self._c._get(
-            f"/terra/wasm/v1beta1/contracts/{contract_address}/store", params
-        )
-        return res.get("query_result")
+        
+        params = base64.b64encode(json.dumps(query).encode("utf-8")).decode("utf-8")
 
+        res = await self._c._get(
+            f"/cosmwasm/wasm/v1/contract/{contract_address}/smart/{params}"
+        )
+        
+        return res.get("data")
+    
     async def parameters(self) -> dict:
         """Fetches the Wasm module parameters.
 

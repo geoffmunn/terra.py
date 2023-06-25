@@ -217,7 +217,8 @@ class MsgExecuteContract(Msg):
 
     type_amino = "wasm/MsgExecuteContract"
     """"""
-    type_url = "/terra.wasm.v1beta1.MsgExecuteContract"
+    #type_url = "/terra.wasm.v1beta1.MsgExecuteContract"
+    type_url = "/cosmwasm.wasm.v1.MsgExecuteContract"
     """"""
     prototype = MsgExecuteContract_pb
     """"""
@@ -240,11 +241,16 @@ class MsgExecuteContract(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgExecuteContract:
+
+        asset      = data['msg']['swap']['offer_asset']
+        amount:str = str(asset['amount'])
+        denom:str  = asset['info']['native_token']['denom']
+
         return cls(
             sender=data["sender"],
             contract=data["contract"],
-            execute_msg=parse_msg(data["execute_msg"]),
-            coins=Coins.from_data(data["coins"]),
+            execute_msg=parse_msg(data["msg"]),
+            coins = Coins.from_str(amount + denom)
         )
 
     def to_proto(self) -> MsgExecuteContract_pb:

@@ -35,18 +35,6 @@ from .lcdutils import AsyncLCDUtils, LCDUtils
 from .params import APIParams
 from .wallet import AsyncWallet, Wallet
 
-
-def get_default(chain_id: str) -> [Coins, Numeric]:
-    if chain_id == "columbus-5":
-        return [Coins.from_str("0.15uusd"), Numeric.parse(1.75)]
-    if chain_id == "bombay-12":
-        return [Coins.from_str("0.15uusd"), Numeric.parse(1.75)]
-    if chain_id == "localterra":
-        return [Coins.from_str("0.15uusd"), Numeric.parse(1.75)]
-
-    raise ValueError("chain_id is invalid")
-
-
 class AsyncLCDClient:
     def __init__(
         self,
@@ -69,7 +57,9 @@ class AsyncLCDClient:
         self.url = url
         self.last_request_height = None
 
-        default_price, default_adjustment = get_default(chain_id)
+        #default_price, default_adjustment = get_default(chain_id)
+        default_price = Coins.from_str('1uluna')
+        default_adjustment = 1
         self.gas_prices = Coins(gas_prices) if gas_prices else default_price
         self.gas_adjustment = gas_adjustment if gas_adjustment else default_adjustment
 

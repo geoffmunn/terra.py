@@ -5,10 +5,24 @@ from mnemonic import Mnemonic
 
 from .raw import RawKey
 
-__all__ = ["MnemonicKey", "LUNA_COIN_TYPE"]
+__all__ = ["MnemonicKey"]
 
-LUNA_COIN_TYPE = 330
-
+coin_types = {
+    'cosmos': 118,
+    'juno': 118,
+    'kava': 459,
+    'kujira': 118,
+    'osmo': 118,
+    'terra': 330,
+    'emoney': 118,
+    'sif': 118,
+    'inj': 60,     # Possibly wrong coin type
+    'axelar': 118,
+    'umee': 118,
+    'omniflix': 118,
+    'gravity': 118,
+    'somm': 118
+}
 
 class MnemonicKey(RawKey):
     """A MnemonicKey derives a private key using a BIP39 mnemonic seed phrase, and provides key-derivation options based on the BIP44 HD path standard.
@@ -36,6 +50,9 @@ class MnemonicKey(RawKey):
     coin_type: int
     """HD path parameter: coin type"""
 
+    prefix: str
+    """The prefix of the address - usually 'terra'"""
+
     @property
     def hd_path(self) -> str:
         """Returns the BIP32 HD path for key-derivation:
@@ -52,8 +69,11 @@ class MnemonicKey(RawKey):
         mnemonic: str = None,
         account: int = 0,
         index: int = 0,
-        coin_type: int = LUNA_COIN_TYPE,
+        prefix:str = 'terra'
     ):
+        
+        coin_type = coin_types[prefix]
+        
         if mnemonic is None:
             mnemonic = Mnemonic("english").generate(256)
         seed = Mnemonic("english").to_seed(mnemonic)
@@ -72,3 +92,4 @@ class MnemonicKey(RawKey):
         self.coin_type = coin_type
         self.account = account
         self.index = index
+        self.address_prefix = prefix

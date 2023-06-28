@@ -26,6 +26,8 @@ The Terra Classic Software Development Kit (SDK) in Python is a simple library t
 - Written in Python with extensive support libraries
 - Versatile support for key management solutions
 - Exposes the Terra Classic API through LCDClient
+- Supports non-Terra Classic addresses for transactions
+- IBC swaps between non-Terra Classic chains are partially supported (where IBC channels exist)
 
 <br/>
 

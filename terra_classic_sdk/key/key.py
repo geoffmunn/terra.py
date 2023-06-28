@@ -88,7 +88,7 @@ class Key:
         """
         if not self.raw_address:
             raise ValueError("could not compute acc_address: missing raw_address")
-        return AccAddress(get_bech("terra", self.raw_address.hex()))
+        return AccAddress(get_bech(self.prefix, self.raw_address.hex()))
 
     @property
     def val_address(self) -> ValAddress:
@@ -103,6 +103,21 @@ class Key:
         if not self.raw_address:
             raise ValueError("could not compute val_address: missing raw_address")
         return ValAddress(get_bech("terravaloper", self.raw_address.hex()))
+
+    @property
+    def prefix(self) -> str:
+        """The prefix of the address that was created.
+        It would normally be 'terra', but could be other cosmos-compatible addresses.
+
+        Raises:
+            ValueError: if Key was not initialized any kind of value
+
+        Returns:
+            string
+        """
+        if not self.address_prefix:
+            raise ValueError("No address prefix found")
+        return self.address_prefix
 
     @property
     def acc_pubkey(self) -> AccPubKey:

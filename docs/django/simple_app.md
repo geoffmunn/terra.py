@@ -35,4 +35,4 @@ urlpatterns = [
 ```
 python manage.py runserver
 ```
-![Visuel consommation ressource avant mode dégradé](./static/img/simple_app.PNG)
+![first_app](../img/simple_app_django.PNG)

@@ -1,13 +1,13 @@
-Create virtual env
+Create  virtual environment <b>terra_classic_env</b>
 ```
 python -m venv terra_classic_env
 ```
 Activate the virtual environment on Window
-```
+```windows
 terra_classic_env/Script/activate
 ```
 or Linux
-```
+```linux
 source terra_classic_env/bin/activate
 ```
 Install <b>Django</b>
@@ -18,7 +18,8 @@ Install <b>terra classic</b>
 ```
 pip install terra-classic-sdk
 ```
-Create projet <b>django_app</b>
+### Creation of a new project
+Use the standard django-admin script to create a project named <b>django_app</b>.
 ```
 django-admin startproject django_app
 ```
@@ -63,6 +64,7 @@ urlpatterns = [
     path('', views.index, name="index"),
 ]
 ```
+### Configuration de settings.py
 Add terra_app to <b>django_app/settings.py</b>
 
 <i>django_app/settings.py</i>

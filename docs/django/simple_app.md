@@ -7,7 +7,7 @@ Create virtual environment <b>terra_classic_env</b>
 ```
 python -m venv terra_classic_env
 ```
-### Installation
+
 Activate the virtual environment on Window
 ```windows
 terra_classic_env/Script/activate
@@ -16,11 +16,12 @@ or Linux
 ```linux
 source terra_classic_env/bin/activate
 ```
-Install <b>Django</b>
+### Installation
+Installing <b>Django</b>
 ```
 pip install django
 ```
-Install <b>terra classic</b>
+Installing <b>Terra Classic SDK</b>
 ```
 pip install terra-classic-sdk
 ```
@@ -29,11 +30,12 @@ Use the standard django-admin script to create a project named <b>django_app</b>
 ```
 django-admin startproject django_app
 ```
+### Creation of a new app
 Create app <b>terra_app</b>
 ```
 python manage.py startapp terra_app
 ```
-Modify <b>views.py</b> for connect terra classic blockchain and display the last block
+Update <b>views.py</b> for connect terra classic blockchain and display the last block
 
 <i>terra_app/views.py</i>
 ```python3
@@ -85,11 +87,11 @@ INSTALLED_APPS = [
     'terra_app',
 ]
 ```
-Run serveur
+### Run serveur
 ```
 python manage.py runserver
 ```
 
-You can see on http://127.0.0.1:8000 
+You can see the result on http://127.0.0.1:8000/
 
 ![first_app](../img/simple_app_django.PNG)

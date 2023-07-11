@@ -1,7 +1,13 @@
-Create  virtual environment <b>terra_classic_env</b>
+# Simple app - Terra Classic + Django
+## Introduction
+This tutorial enables you to initiate a Django application utilizing the Terra Classic blockchain and exhibit the most recent block
+## Tutorial
+### Virtual Environment
+Create virtual environment <b>terra_classic_env</b>
 ```
 python -m venv terra_classic_env
 ```
+### Installation
 Activate the virtual environment on Window
 ```windows
 terra_classic_env/Script/activate

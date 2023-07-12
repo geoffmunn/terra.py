@@ -1,7 +1,7 @@
 Building and Signing Transactions
 =================================
 
-If you want to perform a state-changing operation on the Terra blockchain such as
+If you want to perform a state-changing operation on the Terra Classic blockchain such as
 sending tokens, swapping assets, withdrawing rewards, or even invoking functions on
 smart contracts, you must create a **transaction** and broadcast it to the network.
 
@@ -13,7 +13,7 @@ a transaction. It contains:
 - **signatures**: a list of signatures from required signers (depends on messages)
 - **memo**: a short string describing transaction (can be empty string)
 
-Terra SDK provides functions that help create StdTx objects.
+Terra Classic SDK provides functions that help create StdTx objects.
 
 Using a Wallet (recommended)
 ----------------------------
@@ -34,7 +34,7 @@ correspond to the account you intend to sign the transaction with.
     from terra_classic_sdk.key.mnemonic import MnemonicKey
 
     mk = MnemonicKey(mnemonic=MNEMONIC) 
-    terra = LCDClient("https://lcd.terra.dev", "columbus-5")
+    terra = LCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5")
     wallet = terra.wallet(mk)
 
 
@@ -126,7 +126,7 @@ A SignDoc contains the information required to build a StdTx:
     from terra_classic_sdk.key.mnemonic import MnemonicKey
     from terra_classic_sdk.core import Coin, Coins
 
-    terra = LCDClient("https://lcd.terra.dev", "columbus-5")
+    terra = LCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5")
     key = MnemonicKey(mnemonic=MNEMONIC)
 
     msg = MsgSend(
@@ -182,7 +182,7 @@ Each ``SignDoc`` should only differ by ``account`` and ``sequence``, which vary 
     from terra_classic_sdk.key.mnemonic import MnemonicKey
     from terra_classic_sdk.core.bank import MsgMultiSend, MultiSendInput, MultiSendOutput
 
-    terra = LCDClient("https://lcd.terra.dev", "columbus-5")
+    terra = LCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5")
     wallet1 = terra.wallet(MnemonicKey(mnemonic=MNEMONIC_1))
     wallet2 = terra.wallet(MnemonicKey(mnemonic=MNEMONIC_2))
 

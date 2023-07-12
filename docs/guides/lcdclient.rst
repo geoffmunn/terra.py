@@ -14,7 +14,7 @@ Create a new LCDClient instance by specifying the URL and chain ID of the node t
 .. code-block:: python
 
     >>> from terra_classic_sdk.client.lcd import LCDClient
-    >>> terra = LCDClient(url="https://lcd.terra.dev", chain_id="columbus-5")
+    >>> terra = LCDClient(url="https://terra-classic-lcd.publicnode.com", chain_id="columbus-5")
     >>> terra.tendermint.node_info()['default_node_info']['network']
     'columbus-5'
 
@@ -26,9 +26,9 @@ You can also specify gas estimation parameters for your chain for building trans
     import requests
     from terra_classic_sdk.core import Coins
 
-    res = requests.get("https://fcd.terra.dev/v1/txs/gas_prices")
+    res = requests.get("https://terra-classic-fcd.publicnode.com/v1/txs/gas_prices")
     terra = LCDClient(
-        url="https://lcd.terra.dev",
+        url="https://terra-classic-lcd.publicnode.com",
         chain_id="columbus-5",
         gas_prices=Coins(res.json()),
         gas_adjustment="1.4"

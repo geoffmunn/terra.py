@@ -217,7 +217,6 @@ class MsgExecuteContract(Msg):
 
     type_amino = "wasm/MsgExecuteContract"
     """"""
-    #type_url = "/terra.wasm.v1beta1.MsgExecuteContract"
     type_url = "/cosmwasm.wasm.v1.MsgExecuteContract"
     """"""
     prototype = MsgExecuteContract_pb
@@ -242,9 +241,16 @@ class MsgExecuteContract(Msg):
     @classmethod
     def from_data(cls, data: dict) -> MsgExecuteContract:
 
-        asset      = data['msg']['swap']['offer_asset']
-        amount:str = str(asset['amount'])
-        denom:str  = asset['info']['native_token']['denom']
+        if 'swap' in data['msg']:
+            # Standard swap result:
+            asset      = data['msg']['swap']['offer_asset']
+            amount:str = str(asset['amount'])
+            denom:str  = asset['info']['native_token']['denom']
+        else:
+            # Smart contracts sometimes return a different format
+            funds = data['funds'][0]
+            amount:str = str(funds['amount'])
+            denom:str  = funds['denom']
 
         return cls(
             sender=data["sender"],

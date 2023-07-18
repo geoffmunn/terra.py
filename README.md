@@ -138,10 +138,10 @@ If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLC
 >>> from terra_classic_sdk.client.lcd import AsyncLCDClient
 
 >>> async def main():
-      <strong>terra = AsyncLCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5")</strong>
+      terra = AsyncLCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5")
       total_supply = await terra.bank.total()
       print(total_supply)
-      <strong>await terra.session.close # you must close the session</strong>
+      await terra.session.close # you must close the session
 
 >>> asyncio.get_event_loop().run_until_complete(main())
 ```

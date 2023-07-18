@@ -114,7 +114,7 @@ The following examples are provided to help you get started. Use cases and funct
 
 In order to interact with the Terra Classic blockchain, you'll need a connection to a Terra Classic node. This can be done through setting up an LCDClient (The LCDClient is an object representing an HTTP connection to a Terra Classic LCD node.):
 
-```
+```python
 >>> from terra_classic_sdk.client.lcd import LCDClient
 >>> terra = LCDClient(chain_id="columbus-5", url="https://terra-classic-lcd.publicnode.com")
 ```
@@ -123,7 +123,7 @@ In order to interact with the Terra Classic blockchain, you'll need a connection
 
 Once properly configured, the `LCDClient` instance will allow you to interact with the Terra Classic blockchain. Try getting the latest block height:
 
-```
+```python
 >>> terra.tendermint.block_info()['block']['header']['height']
 ```
 
@@ -133,18 +133,18 @@ Once properly configured, the `LCDClient` instance will allow you to interact wi
 
 If you want to make asynchronous, non-blocking LCD requests, you can use AsyncLCDClient. The interface is similar to LCDClient, except the module and wallet API functions must be awaited.
 
-<pre><code>
+```python
 >>> import asyncio 
 >>> from terra_classic_sdk.client.lcd import AsyncLCDClient
 
 >>> async def main():
-      <strong>terra = AsyncLCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5")</strong>
+      terra = AsyncLCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5")
       total_supply = await terra.bank.total()
       print(total_supply)
-      <strong>await terra.session.close # you must close the session</strong>
+      await terra.session.close # you must close the session
 
 >>> asyncio.get_event_loop().run_until_complete(main())
-</code></pre>
+```
 
 ## Building and Signing Transactions
 
@@ -159,7 +159,7 @@ Use `LCDClient.wallet()` to create a Wallet from any Key instance. The Key provi
   
 <sub>**NOTE:** *If you are using MacOS and got an exception 'bad key length' from MnemonicKey, please check your python implementation. if `python3 -c "import ssl; print(ssl.OPENSSL_VERSION)"` returns LibreSSL 2.8.3, you need to reinstall python via pyenv or homebrew.*</sub>
 
-```
+```python
 >>> from terra_classic_sdk.client.lcd import LCDClient
 >>> from terra_classic_sdk.key.mnemonic import MnemonicKey
 
@@ -170,7 +170,7 @@ Use `LCDClient.wallet()` to create a Wallet from any Key instance. The Key provi
 
 Once you have your Wallet, you can simply create a StdTx using `Wallet.create_and_sign_tx`.
 
-```
+```python
 >>> from terra_classic_sdk.core.fee import Fee
 >>> from terra_classic_sdk.core.bank import MsgSend
 >>> from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions
@@ -188,7 +188,7 @@ Once you have your Wallet, you can simply create a StdTx using `Wallet.create_an
 
 You should now be able to broadcast your transaction to the network.
 
-```
+```python
 >>> result = terra.tx.broadcast(tx)
 >>> print(result)
 ```

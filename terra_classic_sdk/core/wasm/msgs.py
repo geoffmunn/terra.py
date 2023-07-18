@@ -248,7 +248,7 @@ class MsgExecuteContract(Msg):
             denom:str  = asset['info']['native_token']['denom']
         else:
             # Smart contracts sometimes return a different format
-            funds = data['funds'][0]
+            funds      = data['funds'][0]
             amount:str = str(funds['amount'])
             denom:str  = funds['denom']
 

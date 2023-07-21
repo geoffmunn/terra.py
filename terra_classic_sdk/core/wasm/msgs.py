@@ -248,9 +248,16 @@ class MsgExecuteContract(Msg):
             denom:str  = asset['info']['native_token']['denom']
         else:
             # Smart contracts sometimes return a different format
-            funds      = data['funds'][0]
-            amount:str = str(funds['amount'])
-            denom:str  = funds['denom']
+            if len(data['funds']) > 0:
+                # Base swaps from LUNC -> BASE have results in the data['funds'] array
+                funds      = data['funds'][0]
+                amount:str = str(funds['amount'])
+                denom:str  = funds['denom']
+            else:
+                # BASE swaps from BASE -> LUNC don't have anyting except in the msg value
+                if 'msg' in data and 'burn' in data['msg']:
+                    amount:str = str(data['msg']['burn']['amount'])
+                    denom:str  = 'uluna'
 
         return cls(
             sender=data["sender"],

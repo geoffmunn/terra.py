@@ -241,23 +241,36 @@ class MsgExecuteContract(Msg):
     @classmethod
     def from_data(cls, data: dict) -> MsgExecuteContract:
 
+        amount:str = None
+        denom:str  = None
+
         if 'swap' in data['msg']:
             # Standard swap result:
-            asset      = data['msg']['swap']['offer_asset']
-            amount:str = str(asset['amount'])
-            denom:str  = asset['info']['native_token']['denom']
+            asset  = data['msg']['swap']['offer_asset']
+            amount = str(asset['amount'])
+            denom  = asset['info']['native_token']['denom']
         else:
             # Smart contracts sometimes return a different format
             if len(data['funds']) > 0:
                 # Base swaps from LUNC -> BASE have results in the data['funds'] array
-                funds      = data['funds'][0]
-                amount:str = str(funds['amount'])
-                denom:str  = funds['denom']
+                funds  = data['funds'][0]
+                amount = str(funds['amount'])
+                denom  = funds['denom']
             else:
-                # BASE swaps from BASE -> LUNC don't have anyting except in the msg value
+                # BASE transactions don't have anyting except in the msg value
                 if 'msg' in data and 'burn' in data['msg']:
-                    amount:str = str(data['msg']['burn']['amount'])
-                    denom:str  = 'uluna'
+                    # BASE -> LUNC swap
+                    amount = str(data['msg']['burn']['amount'])
+                    denom  = 'uluna'
+                if 'msg' in data and 'transfer' in data['msg']:
+                    # BASE send to a different account
+                    amount = str(data['msg']['transfer']['amount'])
+                    denom  = 'uluna'
+
+        if amount is None and denom is None:
+            print (' 🛑 This is an unsupported response!')
+            print (data)
+            exit()
 
         return cls(
             sender=data["sender"],

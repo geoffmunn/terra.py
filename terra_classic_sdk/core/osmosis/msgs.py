@@ -176,7 +176,7 @@ class MsgSwapExactAmountIn(Msg):
 
     type_amino = "wasm/SwapExactAmountIn"
     """"""
-    type_url = "/osmosis.gamm.v1beta1.SwapExactAmountIn"
+    type_url = "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn"
     """"""
     prototype = MsgSwapExactAmountIn_pb
     """"""
@@ -207,10 +207,13 @@ class MsgSwapExactAmountIn(Msg):
         )
 
     def to_proto(self) -> MsgSwapExactAmountIn_pb:
+        route_list:list = []
+        for route in self.routes:
+            route_list.append(SwapAmountInRoute.from_data({'pool_id': int(route['pool_id']), 'token_out_denom': route['token_out_denom']}).to_proto())
+
         return MsgSwapExactAmountIn_pb(
             sender=self.sender,
-            routes=self.routes.to_proto(),
-            contract=self.contract,
+            routes = route_list,
             token_in=self.token_in.to_proto(),
             token_out_min_amount=self.token_out_min_amount,
         )

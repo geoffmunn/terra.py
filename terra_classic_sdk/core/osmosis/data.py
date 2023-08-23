@@ -32,8 +32,8 @@ class SwapAmountInRoute(JSONSerializable):
             "token_out_denom": self.token_out_denom,
         }
 
-    def to_proto(self) -> List[SwapAmountInRoute_pb]:
-        return [SwapAmountInRoute_pb(pool_id=route.pool_id, token_out_denom=route.token_out_denom) for route in self]
+    def to_proto(self) -> SwapAmountInRoute_pb:
+        return SwapAmountInRoute_pb(pool_id=self.pool_id, token_out_denom=self.token_out_denom)
 
     @classmethod
     def from_data(cls, data: dict) -> SwapAmountInRoute:

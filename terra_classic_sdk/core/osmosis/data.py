@@ -4,8 +4,6 @@ import json
 from typing import List, Optional, Union
 
 import attr
-#from osmosis_protobuf.osmosis.gamm import SwapAmountInRoute as SwapAmountInRoute_pb
-#from osmosis_protobuf.osmosis.gamm import SwapAmountOutRoute as SwapAmountOutRoute_pb
 
 from terra_proto.osmosis.gamm.v1beta1 import SwapAmountInRoute as SwapAmountInRoute_pb
 from terra_proto.osmosis.gamm.v1beta1 import SwapAmountOutRoute as SwapAmountOutRoute_pb

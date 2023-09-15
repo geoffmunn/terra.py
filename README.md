@@ -28,6 +28,12 @@ The Terra Classic Software Development Kit (SDK) in Python is a simple library t
 - Exposes the Terra Classic API through LCDClient
 - Supports non-Terra Classic addresses for transactions
 - IBC swaps between non-Terra Classic chains are partially supported (where IBC channels exist)
+- Osmosis support (requires terra.proto 3.0.2 or newer)
+
+## Recent changes
+
+### 2.0.10
+- Osmosis support
 
 <br/>
 

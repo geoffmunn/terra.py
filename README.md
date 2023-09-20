@@ -33,7 +33,7 @@ The Terra Classic Software Development Kit (SDK) in Python is a simple library t
 ## Recent changes
 
 ### 2.0.10
-- Osmosis support
+- Osmosis support. This is just a simple exposure of the messages in terra.proto.
 
 <br/>
 

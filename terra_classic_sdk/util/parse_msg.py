@@ -65,6 +65,10 @@ from terra_classic_sdk.core.crisis import (
     MsgVerifyInvariant
 )
 
+from terra_classic_sdk.core.osmosis import (
+    MsgSwapExactAmountIn
+)
+
 bank_msgs = [MsgSend, MsgMultiSend]
 distribution_msgs = [
     MsgFundCommunityPool,
@@ -130,6 +134,10 @@ crisis_msgs = [
     MsgVerifyInvariant
 ]
 
+osmosis_msgs = [
+    MsgSwapExactAmountIn
+]
+
 parse_msg = create_demux(
     [
         *authz_msgs,
@@ -144,7 +152,8 @@ parse_msg = create_demux(
         *wasm_msgs,
         *ibc_msgs,
         *ibc_transfer_msgs,
-        *crisis_msgs
+        *crisis_msgs,
+        *osmosis_msgs
     ]
 )
 
@@ -162,7 +171,8 @@ parse_proto = create_demux_proto(
         *wasm_msgs,
         *ibc_msgs,
         *ibc_transfer_msgs,
-        *crisis_msgs
+        *crisis_msgs,
+        *osmosis_msgs
     ]
 )
 
@@ -181,6 +191,7 @@ parse_unpack_any = create_demux_unpack_any(
         *wasm_msgs,
         *ibc_msgs,
         *ibc_transfer_msgs,
-        *crisis_msgs
+        *crisis_msgs,
+        *osmosis_msgs
     ]
 )

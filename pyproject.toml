@@ -19,7 +19,7 @@ license = "MIT"
 packages = [{ include = "terra_classic_sdk" }]
 readme = "README.md"
 repository = "https://github.com/terra-money/terra.py"
-version = "2.0.10.1"
+version = "2.0.10"
 
 [tool.poetry.dependencies]
 aiohttp = "^3.8.1"

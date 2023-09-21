@@ -23,9 +23,6 @@ from terra_classic_sdk.core import AccAddress, Coins, Coin
 from terra_classic_sdk.core.msg import Msg
 from terra_classic_sdk.util.remove_none import remove_none
 
-from terra_proto.osmosis.gamm.v1beta1 import PoolParams as PoolParams_pb
-
-
 __all__ = [
     "MsgJoinPool",
     "MsgExitPool",
@@ -37,64 +34,10 @@ __all__ = [
     "MsgExitSwapShareAmountIn"
 ]
 
-
 def parse_msg(msg: Union[dict, str, bytes]) -> dict:
     if type(msg) is dict:
         return msg
     return json.loads(msg)
-
-
-@attr.s
-class MsgPool(Msg):
-    type_amino = "osmosis/Msg/Pool"
-    """"""
-    type_url = "/osmosis.gamm.v1beta1.Msg/Pool"
-    """"""
-    prototype = PoolParams_pb
-    """"""
-
-    sender: AccAddress = attr.ib()
-    pool_id: int = attr.ib()
-    share_out_amount: str = attr.ib()
-    token_in_maxs: Coins = attr.ib(converter=Coins, factory=Coins)
-
-    # def to_amino(self) -> dict:
-    #     return {
-    #         "type": self.type_amino,
-    #         "value": {
-    #             "sender": self.sender,
-    #             "pool_id": self.pool_id,
-    #             "share_out_amount": self.share_out_amount(),
-    #             "coins": self.token_in_maxs.to_amino(),
-    #         },
-    #     }
-
-    # @classmethod
-    # def from_data(cls, data: dict) -> MsgJoinPool:
-    #     return cls(
-    #         sender=data["sender"],
-    #         pool_id=data["pool_id"],
-    #         share_out_amount=data["share_out_amount"],
-    #         coins=Coins.from_data(data["funds"]),
-    #     )
-
-    # def to_proto(self) -> MsgJoinPool_pb:
-    #     return MsgJoinPool_pb(
-    #         sender=self.sender,
-    #         pool_id=self.pool_id,
-    #         share_out_amount=self.share_out_amount,
-    #         token_in_maxs=self.token_in_maxs.to_proto(),
-    #     )
-
-    # @classmethod
-    # def from_proto(cls, proto: MsgJoinPool_pb) -> MsgJoinPool:
-    #     return cls(
-    #         sender=proto.sender,
-    #         pool_id=proto.pool_id,
-    #         share_out_amount=proto.share_out_amount,
-    #         token_in_maxs=Coins.from_proto(proto.token_in_maxs)
-    #     )
-    
 
 @attr.s
 class MsgJoinPool(Msg):

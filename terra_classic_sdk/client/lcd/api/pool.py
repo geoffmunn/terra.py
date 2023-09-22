@@ -35,9 +35,8 @@ class AsyncPoolAPI(BaseAsyncAPI):
     #     res = await self._c._get("/cosmos/bank/v1beta1/supply", params)
     #     return Coins.from_data(res.get("supply")), res.get("pagination")
 
-
 class PoolAPI(AsyncPoolAPI):
-    @sync_bind(AsyncPoolAPI.details)
+    @sync_bind(AsyncPoolAPI.osmosis_pool)
     #def pool(self, pool_id: int) -> tuple(Coins, dict):
     def osmosis_pool(self, pool_id: int):
         pass

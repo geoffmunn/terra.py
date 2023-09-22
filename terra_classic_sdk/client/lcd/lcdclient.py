@@ -25,6 +25,7 @@ from .api.ibc_transfer import AsyncIbcTransferAPI, IbcTransferAPI
 from .api.market import AsyncMarketAPI, MarketAPI
 from .api.mint import AsyncMintAPI, MintAPI
 from .api.oracle import AsyncOracleAPI, OracleAPI
+from .api.pool import AsyncPoolAPI, PoolAPI
 from .api.slashing import AsyncSlashingAPI, SlashingAPI
 from .api.staking import AsyncStakingAPI, StakingAPI
 from .api.tendermint import AsyncTendermintAPI, TendermintAPI
@@ -72,6 +73,7 @@ class AsyncLCDClient:
         self.mint = AsyncMintAPI(self)
         self.authz = AsyncAuthzAPI(self)
         self.oracle = AsyncOracleAPI(self)
+        self.pool = AsyncPoolAPI(self)
         self.slashing = AsyncSlashingAPI(self)
         self.staking = AsyncStakingAPI(self)
         self.tendermint = AsyncTendermintAPI(self)
@@ -218,6 +220,9 @@ class LCDClient(AsyncLCDClient):
     oracle: OracleAPI
     """:class:`OracleAPI<terra_classic_sdk.client.lcd.api.oracle.OracleAPI>`."""
 
+    pool: PoolAPI
+    """:class:`PoolAPI<terra_classic_sdk.client.lcd.api.pool.PoolAPI>`."""
+
     slashing: SlashingAPI
     """:class:`SlashingAPI<terra_classic_sdk.client.lcd.api.slashing.SlashingAPI>`."""
 
@@ -267,6 +272,7 @@ class LCDClient(AsyncLCDClient):
         self.mint = MintAPI(self)
         self.authz = AuthzAPI(self)
         self.oracle = OracleAPI(self)
+        self.pool = PoolAPI(self)
         self.slashing = SlashingAPI(self)
         self.staking = StakingAPI(self)
         self.tendermint = TendermintAPI(self)

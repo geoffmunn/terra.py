@@ -81,7 +81,7 @@ Terra Classic SDK requires <a href="https://www.python.org/downloads/">Python v3
 Terra SDK can be installed (preferably in a `virtual environment` from PyPI using `pip`) as follows:
 
 ```
-$ pip install -U terra_classic_sdk
+$ pip install -U terra-classic-sdk
 ```
 
 <sub>_You might need to run pip via ```python -m pip install -U terra_classic_sdk```. Additionally, you might have `pip3` installed instead of `pip`; proceed according to your own setup._<sub>

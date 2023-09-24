@@ -16,6 +16,9 @@ from .data import (
     SwapAmountOutRoute
 )
 
+from .pools.pool import Pool
+from terra_proto.osmosis.gamm.v1beta1 import PoolParams, PoolAsset
+
 __all__ = [
     "MsgJoinPool",
     "MsgExitPool",
@@ -25,6 +28,9 @@ __all__ = [
     "MsgJoinSwapShareAmountOut",
     "MsgExitSwapExternAmountOut",
     "MsgExitSwapShareAmountIn",
+    "Pool",
+    "PoolAsset",
+    "PoolParams",
     "SwapAmountInRoute", 
     "SwapAmountOutRoute"    
 ]

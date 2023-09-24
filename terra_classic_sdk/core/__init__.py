@@ -20,7 +20,7 @@ __all__ = [
     "TxLog",
     "ModeInfo",
     "ModeInfoSingle",
-    "ModeInfoMulti",
+    "ModeInfoMulti"
 ]
 
 from .bech32 import AccAddress, AccPubKey, ValAddress, ValPubKey

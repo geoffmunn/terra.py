@@ -14,6 +14,7 @@ class Pool(JSONSerializable):
     in Cosmos SDK. Used for representing Terra native assets.
     """
 
+    type: str                    = attr.ib()
     address: str                 = attr.ib()
     id: Numeric.Output           = attr.ib(converter = Numeric.parse)
     pool_params: PoolParams      = attr.ib()   
@@ -21,23 +22,6 @@ class Pool(JSONSerializable):
     total_shares: Coin           = attr.ib()
     pool_assets: list            = attr.ib()
     total_weight: Numeric.Output = attr.ib(converter = Numeric.parse)
-
-    # @staticmethod
-    # def parse(arg: Union[Pool, str, dict]) -> Pool:
-    #     """Converts the argument into a PoolParams object.
-
-    #     Args:
-    #         arg (Union[Coin, str, dict]): value to be converted to coin
-    #     """
-    #     if isinstance(arg, Pool):
-    #         return arg
-    #     elif isinstance(arg, str):
-    #         return Pool.from_str(arg)
-    #     else:
-    #         return Pool.from_data(arg)
-
-    # def to_amino(self) -> dict:
-    #     return {"swap_fee": self.swap_fee, "exit_fee": self.exit_fee}
 
     def to_data(self) -> dict:
 
@@ -48,6 +32,7 @@ class Pool(JSONSerializable):
 
         result:dict = {
             'pool': {
+                'type': self.type,
                 'address': self.address, 
                 'future_pool_governor': self.future_pool_governor, 
                 'id': self.id, 
@@ -68,22 +53,51 @@ class Pool(JSONSerializable):
             data (dict): data object
         """
 
-        print ('data:', data)
         # Get the basic items
-        address:str              = data['address']
-        id:int                   = data['id']
-        future_pool_governor:str = data['future_pool_governor']
-        total_weight:str         = data['total_weight']
+        address:str = data['address']
+        id:int      = data['id']
+        type:str    = data['@type']
+
+        if 'future_pool_governor' in data:
+            future_pool_governor:str = data['future_pool_governor']
+        else:
+            future_pool_governor:str = ''
+
+        if 'total_weight' in data:
+            total_weight:int = data['total_weight']
+        else:
+            total_weight:int = 0
 
         # Construct the pool parameters
-        pool_params:PoolParams = PoolParams().from_dict(data['pool_params'])
+        if 'pool_params' in data:
+            pool_params:dict = data['pool_params']
+        else:
+            pool_params:dict = {'swap_fee': 0, 'exit_fee': 0, 'smooth_weight_change_params': None, 'spread_factor': data['spread_factor']}
+
+        pool_params:PoolParams = PoolParams().from_dict(pool_params)
 
         # Shares are just Coin objects
-        total_shares: Coin = Coin.from_data(data['total_shares'])
+        if 'total_shares' in data:
+            total_shares: Coin = Coin.from_data(data['total_shares'])
+        else:
+            total_shares: Coin = None
         
         # Build a list of assets
         pool_assets:list = []
-        for asset in data['pool_assets']:
-            pool_assets.append(PoolAsset().from_dict(asset))
-
-        return cls(address, id, pool_params, future_pool_governor, total_shares, pool_assets, total_weight)
+        #/osmosis.concentratedliquidity.v1beta1.Pool
+        #/osmosis.gamm.v1beta1.Pool
+        if type != '/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool':
+            if 'pool_assets' in data:
+                for asset in data['pool_assets']:
+                    pool_assets.append(PoolAsset().from_dict(asset))
+            else:
+                for asset in ['token0', 'token1']:
+                    pool_assets.append(PoolAsset().from_dict({
+                        "token": {
+                            "denom": data[asset],
+                            "amount": 0
+                        },
+                        "weight": 0
+                    }))
+        
+        return cls(type, address, id, pool_params, future_pool_governor, total_shares, pool_assets, total_weight)

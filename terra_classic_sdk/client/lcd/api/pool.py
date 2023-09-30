@@ -1,10 +1,8 @@
 from typing import Optional
 
-#from terra_classic_sdk.core import AccAddress, Coins
-
-from ..params import APIParams
 from ._base import BaseAsyncAPI, sync_bind
 
+from terra_classic_sdk.client.lcd.params import PaginationOptions
 from terra_classic_sdk.core.osmosis import Pool
 
 __all__ = ["AsyncPoolAPI", "PoolAPI"]
@@ -38,26 +36,31 @@ class AsyncPoolAPI(BaseAsyncAPI):
         Returns:
             List: all available pools
         """
-
-        res = await self._c._get(f"osmosis/gamm/v1beta1/pools")
-
+    
         pool_list:list = []
+
+        # This is the default pagination object
+        pagOpt:PaginationOptions = PaginationOptions(limit = 100, count_total = True)
+
+        # Go and get the first batch of results
+        res        = await self._c._get(f"osmosis/gamm/v1beta1/pools", params = pagOpt)
+        pagination = res['pagination']
+    
         # Load the result into a Pool object
         for item in res['pools']:
             pool_details:Pool = Pool.from_data(item)
             pool_list.append(pool_details)
 
+        # Now keep doing this until we have no more paginated results
+        while pagination['next_key'] is not None:
+            pagOpt.key = pagination["next_key"]
+            res        = await self._c._get(f"osmosis/gamm/v1beta1/pools", params = pagOpt)
+            pagination = res['pagination']
+            for item in res['pools']:
+                pool_details:Pool = Pool.from_data(item)
+                pool_list.append(pool_details)
+
         return pool_list
-
-    # async def total(self, params: Optional[APIParams] = None) -> (Coins, dict):
-    #     """Fetches the current total supply of all tokens.
-
-    #     Returns:
-    #         Coins: total supply
-    #         params (APIParams, optional): additional params for the API like pagination
-    #     """
-    #     res = await self._c._get("/cosmos/bank/v1beta1/supply", params)
-    #     return Coins.from_data(res.get("supply")), res.get("pagination")
 
 class PoolAPI(AsyncPoolAPI):
     @sync_bind(AsyncPoolAPI.osmosis_pool)
@@ -71,9 +74,3 @@ class PoolAPI(AsyncPoolAPI):
         pass
 
     osmosis_pools.__doc__ = AsyncPoolAPI.osmosis_pools.__doc__
-
-    #@sync_bind(AsyncPoolAPI.total)
-    #def total(self) -> (Coins, dict):
-    #    pass
-
-    #total.__doc__ = AsyncPoolAPI.total.__doc__

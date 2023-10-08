@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 import attr
 
 from terra_proto.osmosis.gamm.v1beta1 import PoolParams, PoolAsset
@@ -54,10 +52,10 @@ class Pool(JSONSerializable):
         """
 
         # Get the basic items
+        type:str    = data['@type']
         address:str = data['address']
         id:int      = data['id']
-        type:str    = data['@type']
-
+        
         if 'future_pool_governor' in data:
             future_pool_governor:str = data['future_pool_governor']
         else:

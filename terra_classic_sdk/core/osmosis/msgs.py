@@ -548,11 +548,3 @@ class MsgExitSwapExternAmountOut(Msg):
             token_out=proto.token_out,
             share_in_max_amount=proto.share_in_max_amount,
         )
-
-
-
-
-
-
-
-

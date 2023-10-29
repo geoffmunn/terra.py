@@ -308,7 +308,7 @@ class TxLog(JSONSerializable):
     events: List[dict] = attr.ib()
     """Raw event log data"""
 
-    events_by_type: Dict[str, Dict[str, List[str]]] = attr.ib()
+    events_by_type: Dict[str, Dict[str, List[str]]] = attr.ib(init=False)
     """Event log data, re-indexed by event type name and attribute type.
 
     For instance, the event type may be: ``store_code`` and an attribute key could be

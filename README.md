@@ -32,6 +32,9 @@ The Terra Classic Software Development Kit (SDK) in Python is a simple library t
 
 ## Recent changes
 
+### 2.1.1
+- Better Osmosis support. Pools can now be requested by pool ID, or the entire list can be requested.
+
 ### 2.1.0
 - Osmosis support. This is just a simple exposure of the messages in terra.proto.
 

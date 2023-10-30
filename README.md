@@ -116,7 +116,7 @@ $ make qa && make format
 # Usage Examples
 
 Terra Classic SDK can help you read block data, sign and send transactions, deploy and interact with contracts, and many more.
-The following examples are provided to help you get started. Use cases and functionalities of the Terra Classic SDK are not limited to the following examples and can be found in full <a href="https://terra-money.github.io/terra.py/index.html">here</a>.
+The following examples are provided to help you get started. Use cases and functionalities of the Terra Classic SDK are not limited to the following examples and can be found in full <a href="https://github.com/geoffmunn/utility-scripts/">here</a>.
 
 In order to interact with the Terra Classic blockchain, you'll need a connection to a Terra Classic node. This can be done through setting up an LCDClient (The LCDClient is an object representing an HTTP connection to a Terra Classic LCD node.):
 

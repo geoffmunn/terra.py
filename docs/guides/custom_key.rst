@@ -3,7 +3,7 @@
 Implementing a Custom Key
 =========================
 
-If none of the Key solutions provided by Terra Classic SDK or the community are able to meet your requirements,
+If none of the Key solutions provided by the Terra Classic SDK or the community are able to meet your requirements,
 you might consider writing your own Key implementation. 
 
 Here are just a couple  that help guide
@@ -26,13 +26,13 @@ Usually, reasons for requiring a custom Key fall into one of 3 patterns:
 
 * External signing
 
-    **Scenario:** The transaction signing is to be performed outside the Python program running Terra Classic SDK,
+    **Scenario:** The transaction signing is to be performed outside the Python program running the Terra Classic SDK,
     such as signing via hardware wallet (Ledger, Trezor), etc. 
 
 
 * Alternative signing algorithm
 
-    **Scenario:** Terra Classic account you need to sign transactions for requires a signature algorithm other than
+    **Scenario:** The Terra Classic account you need to sign transactions for requires a signature algorithm other than
     ECDSA on Secp256k1, such as Threshold Multisig or Ed25519. 
 
 
@@ -49,14 +49,34 @@ The source for MnemonicKey is provided as an example:
     from bip32utils import BIP32_HARDEN, BIP32Key
     from mnemonic import Mnemonic
 
+    coin_types = {
+        'cosmos': 118,
+        'juno': 118,
+        'kava': 459,
+        'kujira': 118,
+        'osmo': 118,
+        'terra': 330,
+        'emoney': 118,
+        'sif': 118,
+        'inj': 60,     # Possibly wrong coin type
+        'axelar': 118,
+        'umee': 118,
+        'omniflix': 118,
+        'gravity': 118,
+        'somm': 118
+    }
+
     class MnemonicKey(RawKey):
         def __init__(
             self,
             mnemonic: str = None,
             account: int = 0,
             index: int = 0,
-            coin_type: int = 330,
+            prefix:str = 'terra'
         ):
+            
+            coin_type = coin_types[prefix]
+            
             if mnemonic is None:
                 mnemonic = Mnemonic("english").generate(256)
             seed = Mnemonic("english").to_seed(mnemonic)
@@ -72,5 +92,7 @@ The source for MnemonicKey is provided as an example:
 
             super().__init__(child.PrivateKey())
             self.mnemonic = mnemonic
+            self.coin_type = coin_type
             self.account = account
             self.index = index
+            self.address_prefix = prefix

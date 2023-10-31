@@ -77,3 +77,35 @@ LCDClient Reference
 
 .. autoclass:: terra_classic_sdk.client.lcd.LCDClient
     :members:
+
+TEST
+----
+
+.. code-block:: python
+    :emphasize-lines: 2, 24
+
+    import asyncio
+    import uvloop
+    from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions
+    from terra_classic_sdk.client.lcd import AsyncLCDClient
+    from terra_classic_sdk.core.bank import MsgSend
+    from terra_classic_sdk.key.mnemonic import MnemonicKey
+    from terra_classic_sdk.core import Coins
+    from terra_classic_sdk.core.tx import Tx
+
+    mk = MnemonicKey(mnemonic='secret 24 word phrase')
+    recipient = "terra..."
+
+    async def main():
+        async with AsyncLCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5") as terra:
+            wallet = terra.wallet(mk)
+            tx:Tx = await wallet.create_and_sign_tx(
+                CreateTxOptions(
+                    msgs=[MsgSend(wallet.key.acc_address, recipient, Coins(uluna=100000000))]
+                )
+            )
+
+            print (tx.auth_info.fee)
+
+    uvloop.install()
+    asyncio.run(main())

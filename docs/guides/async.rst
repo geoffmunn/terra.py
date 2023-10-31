@@ -10,7 +10,6 @@ Async module APIs
 You can replace your LCDClient instance with AsyncLCDClient inside a coroutine function:
 
 .. code-block:: python
-    #:emphasize-lines: 5,8
 
     import asyncio 
     from terra_classic_sdk.client.lcd import AsyncLCDClient
@@ -28,7 +27,6 @@ For convenience, you can use the async context manager to automatically teardown
 session. Here's the same code as above, this time using the ``async with`` construct.
 
 .. code-block:: python
-    #:emphasize-lines: 5
 
     import asyncio 
     from terra_classic_sdk.client.lcd import AsyncLCDClient
@@ -47,7 +45,6 @@ When creating a wallet with AsyncLCDClient, the wallet's methods that create LCD
 are also asychronous and therefore must be awaited.
 
 .. code-block:: python
-    #:emphasize-lines: 12-13
 
     import asyncio
     from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions
@@ -80,7 +77,6 @@ The native ``asyncio`` event loop can be replaced with an alternative such as ``
 for more performance. For example:
 
 .. code-block:: python
-    #:emphasize-lines: 2, 24
 
     import asyncio
     import uvloop

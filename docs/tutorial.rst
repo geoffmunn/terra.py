@@ -48,7 +48,7 @@ to interact with the Terra Classic blockchain. Try getting the latest block heig
 .. code-block:: python
 
     >>> terra.tendermint.block_info()['block']['header']['height']
-    '1687543'
+    '15200584'
 
 Terra Classic SDK can help you read block data, sign and send transactions, deploy and interact with contracts,
 and a number of other features.

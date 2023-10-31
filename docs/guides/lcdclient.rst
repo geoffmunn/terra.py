@@ -82,7 +82,6 @@ TEST
 ----
 
 .. code-block:: python
-    :emphasize-lines: 2, 24
 
     import asyncio
     import uvloop

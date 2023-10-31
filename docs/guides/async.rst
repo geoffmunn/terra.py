@@ -52,23 +52,26 @@ are also asychronous and therefore must be awaited.
     import asyncio
     from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions
     from terra_classic_sdk.client.lcd import AsyncLCDClient
+    from terra_classic_sdk.core.bank import MsgSend
     from terra_classic_sdk.key.mnemonic import MnemonicKey
     from terra_classic_sdk.core import Coins
+    from terra_classic_sdk.core.tx import Tx
 
-    mk = MnemonicKey()
-    recipient = "terra1..."
+    mk = MnemonicKey(mnemonic='secret 24 word phrase')
+    recipient = "terra..."
 
     async def main():
         async with AsyncLCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5") as terra:
             wallet = terra.wallet(mk)
-            account_number = await wallet.account_number()
-            tx = await wallet.create_and_sign_tx(
+            tx:Tx = await wallet.create_and_sign_tx(
                 CreateTxOptions(
-                    msgs=[MsgSend(wallet.key.acc_address, recipient, Coins(uluna=10202))]
+                    msgs=[MsgSend(wallet.key.acc_address, recipient, Coins(uluna=100000000))]
                 )
             )
-    
-    asyncio.get_event_loop().run_until_complete(main())
+
+            print (tx.auth_info.fee)
+
+    asyncio.run(main())
 
 Alternative event loops
 -----------------------
@@ -77,16 +80,30 @@ The native ``asyncio`` event loop can be replaced with an alternative such as ``
 for more performance. For example:
 
 .. code-block:: python
-    :emphasize-lines: 2, 10
+    :emphasize-lines: 2, 24
 
     import asyncio
     import uvloop
-
+    from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions
     from terra_classic_sdk.client.lcd import AsyncLCDClient
+    from terra_classic_sdk.core.bank import MsgSend
+    from terra_classic_sdk.key.mnemonic import MnemonicKey
+    from terra_classic_sdk.core import Coins
+    from terra_classic_sdk.core.tx import Tx
+
+    mk = MnemonicKey(mnemonic='secret 24 word phrase')
+    recipient = "terra..."
 
     async def main():
         async with AsyncLCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5") as terra:
-            total_supply = await wallet.bank.total()
+            wallet = terra.wallet(mk)
+            tx:Tx = await wallet.create_and_sign_tx(
+                CreateTxOptions(
+                    msgs=[MsgSend(wallet.key.acc_address, recipient, Coins(uluna=100000000))]
+                )
+            )
 
-    uvloop.install() 
-    asyncio.get_event_loop().run_until_complete(main())
+            print (tx.auth_info.fee)
+
+    uvloop.install()
+    asyncio.run(main())

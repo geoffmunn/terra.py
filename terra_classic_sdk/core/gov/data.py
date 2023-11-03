@@ -107,6 +107,17 @@ class Proposal(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> Proposal:
+
+        if data["voting_start_time"] is None:
+            voting_start_time = ""
+        else:    
+            voting_start_time = parser.parse(str(data["voting_start_time"]))
+        
+        if data["voting_end_time"] is None:
+            voting_end_time = ""
+        else:
+            voting_end_time = parser.parse(str(data["voting_end_time"]))
+
         return cls(
             proposal_id=data["id"],
             content=parse_content(data['messages'][0]["content"]),
@@ -115,8 +126,8 @@ class Proposal(JSONSerializable):
             submit_time=parser.parse(data["submit_time"]),
             deposit_end_time=parser.parse(data["deposit_end_time"]),
             total_deposit=Coins.from_data(data["total_deposit"]),
-            voting_start_time=parser.parse(data["voting_start_time"]),
-            voting_end_time=parser.parse(data["voting_end_time"]),
+            voting_start_time=voting_start_time,
+            voting_end_time=voting_end_time
         )
 
     def to_proto(self) -> Proposal_pb:

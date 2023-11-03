@@ -49,13 +49,13 @@ from terra_classic_sdk.core.staking import (
     MsgUndelegate,
 )
 from terra_classic_sdk.core.wasm import (
-    MsgClearContractAdmin,
+    MsgClearAdmin,
     MsgExecuteContract,
     MsgInstantiateContract,
-    MsgMigrateCode,
+    #MsgMigrateCode,
     MsgMigrateContract,
     MsgStoreCode,
-    MsgUpdateContractAdmin,
+    MsgUpdateAdmin
 )
 from terra_classic_sdk.core.feegrant import (
     MsgGrantAllowance,
@@ -98,12 +98,12 @@ staking_msgs = [
 ]
 wasm_msgs = [
     MsgStoreCode,
-    MsgMigrateCode,
+    #MsgMigrateCode,
     MsgInstantiateContract,
     MsgExecuteContract,
     MsgMigrateContract,
-    MsgUpdateContractAdmin,
-    MsgClearContractAdmin,
+    MsgUpdateAdmin,
+    MsgClearAdmin,
 ]
 feegrant_msgs = [
     MsgGrantAllowance,

@@ -21,7 +21,7 @@ class Plan(JSONSerializable):
     name: str = attr.ib()
     height: str = attr.ib()
     info: str = attr.ib()
-    time: Optional[datetime] = attr.ib(default=None, converter=parse)
+    time: Optional[datetime] = attr.ib()
     upgrade_client_state: Optional[Any] = attr.ib(default=None)
 
     def to_amino(self) -> dict:

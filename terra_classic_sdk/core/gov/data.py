@@ -77,19 +77,19 @@ class Proposal(JSONSerializable):
     final_tally_result: TallyResult = attr.ib()
     """Final tallied result of the proposal (after vote)."""
 
-    submit_time: datetime = attr.ib(converter=parser.parse)
+    submit_time: datetime = attr.ib()
     """Timestamp at which proposal was submitted."""
 
-    deposit_end_time: datetime = attr.ib(converter=parser.parse)
+    deposit_end_time: datetime = attr.ib()
     """Time at which the deposit period ended, or will end."""
 
     total_deposit: Coins = attr.ib(converter=Coins)
     """Total amount deposited for proposal"""
 
-    voting_start_time: datetime = attr.ib(converter=parser.parse)
+    voting_start_time: datetime = attr.ib()
     """Time at which voting period started, or will start."""
 
-    voting_end_time: datetime = attr.ib(converter=parser.parse)
+    voting_end_time: datetime = attr.ib()
     """Time at which voting period ended, or will end."""
 
     def to_amino(self) -> dict:

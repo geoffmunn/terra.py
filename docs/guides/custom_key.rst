@@ -6,8 +6,7 @@ Implementing a Custom Key
 If none of the Key solutions provided by the Terra Classic SDK or the community are able to meet your requirements,
 you might consider writing your own Key implementation. 
 
-Here are just a couple  that help guide
-your design pathways:
+Here are just a couple that help guide your design pathways:
 
 Is the private key accessible by developer?
     * YES: Subclass :class:`terra_classic_sdk.key.raw.RawKey`

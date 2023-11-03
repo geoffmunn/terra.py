@@ -15,21 +15,26 @@ PaginationOption
 You can use PaginationOptions as APIParams for params of query functions.
 
 .. code-block:: python
-    :emphasize-lines: 5,8
 
     from terra_classic_sdk.client.lcd import LCDClient, PaginationOptions
 
     terra = LCDClient(
         url="https://terra-classic-lcd.publicnode.com",
-        chain_id="columbus-5",
+        chain_id="columbus-5"
     )
-
 
     result, pagination  = terra.gov.proposals()
 
+    page_count:int = 1
     while pagination["next_key"] is not None:
         pagOpt = PaginationOptions(key=pagination["next_key"])
-        result, pagination = terra.gov.proposals(params=pagOpt)
+        proposals, pagination = terra.gov.proposals(params=pagOpt)
         pagOpt.key = pagination["next_key"]
-        print(result)
+
+        print ('****************')
+        print (f'Page number {page_count}')
+        for proposal in proposals:
+            print (proposal.content.title)
+
+        page_count += 1
 

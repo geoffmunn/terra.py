@@ -8,6 +8,7 @@ from terra_classic_sdk.core.upgrade import (
     CancelSoftwareUpgradeProposal,
     SoftwareUpgradeProposal,
 )
+from terra_classic_sdk.core.wasm.proposals import UpdateAdminProposal
 
 from terra_proto.cosmos.distribution.v1beta1 import CommunityPoolSpendProposal as CommunityPoolSpendProposal_pb
 from terra_proto.cosmos.gov.v1beta1 import TextProposal as TextProposal_pb
@@ -27,6 +28,7 @@ Content = Union[
     SoftwareUpgradeProposal,
     CancelSoftwareUpgradeProposal,
     ClientUpdateProposal,
+    UpdateAdminProposal
 ]
 
 parse_content = create_demux(
@@ -36,7 +38,8 @@ parse_content = create_demux(
         ParameterChangeProposal,
         SoftwareUpgradeProposal,
         CancelSoftwareUpgradeProposal,
-        ClientUpdateProposal
+        ClientUpdateProposal,
+        UpdateAdminProposal
     ]
 )
 
@@ -47,7 +50,8 @@ parse_content_proto = create_demux_proto(
         ParameterChangeProposal,
         SoftwareUpgradeProposal,
         CancelSoftwareUpgradeProposal,
-        ClientUpdateProposal
+        ClientUpdateProposal,
+        UpdateAdminProposal
     ]
 )
 """

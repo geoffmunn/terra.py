@@ -108,8 +108,8 @@ class Proposal(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict) -> Proposal:
         return cls(
-            proposal_id=data["proposal_id"],
-            content=parse_content(data["content"]),
+            proposal_id=data["id"],
+            content=parse_content(data['messages'][0]["content"]),
             status=data["status"],
             final_tally_result=data["final_tally_result"],
             submit_time=parser.parse(data["submit_time"]),

@@ -145,6 +145,27 @@ class AsyncGovAPI(BaseAsyncAPI):
                     deposits.append(Deposit.from_data(msg))
         return deposits, pagination
 
+    #async def vote(self, proposal_id: int, params: Optional[APIParams] = None):
+    async def vote(self, proposal_id: int, voter_addr: str):
+        """Fetches the registered vote that this address made for a proposal.
+
+        Args:
+            proposal_id (int): proposal ID
+            voter_addr: the wallet address
+        """
+
+        # If no vote has been made on this proposal, it will return an error
+        try:
+            res = await self._c._get(
+                f"/cosmos/gov/v1/proposals/{proposal_id}/votes/{voter_addr}"
+            )
+
+            vote = res.get('vote')
+        except:
+            vote = {}
+
+        return vote
+    
     async def votes(self, proposal_id: int, params: Optional[APIParams] = None):
         """Fetches the votes for a proposal.
 
@@ -264,6 +285,12 @@ class GovAPI(AsyncGovAPI):
         pass
 
     deposits.__doc__ = AsyncGovAPI.deposits.__doc__
+
+    @sync_bind(AsyncGovAPI.vote)
+    def vote(self, proposal_id: int, voter_addr: str):
+        pass
+
+    vote.__doc__ = AsyncGovAPI.vote.__doc__
 
     @sync_bind(AsyncGovAPI.votes)
     def votes(self, proposal_id: int, params: Optional[APIParams] = None):

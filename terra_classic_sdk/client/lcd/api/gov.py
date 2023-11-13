@@ -145,7 +145,6 @@ class AsyncGovAPI(BaseAsyncAPI):
                     deposits.append(Deposit.from_data(msg))
         return deposits, pagination
 
-    #async def vote(self, proposal_id: int, params: Optional[APIParams] = None):
     async def vote(self, proposal_id: int, voter_addr: str):
         """Fetches the registered vote that this address made for a proposal.
 

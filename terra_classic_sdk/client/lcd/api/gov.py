@@ -33,7 +33,7 @@ class AsyncGovAPI(BaseAsyncAPI):
         """
         if params is not None:
             options.update(params.to_dict())
-        res = await self._c._get("/cosmos/gov/v1beta1/proposals", options)
+        res = await self._c._get("/cosmos/gov/v1/proposals", options)
         return [Proposal.from_data(d) for d in res.get("proposals")], res.get(
             "pagination"
         )
@@ -47,13 +47,13 @@ class AsyncGovAPI(BaseAsyncAPI):
         Returns:
             Proposal: proposal
         """
-        res = await self._c._get(f"/cosmos/gov/v1beta1/proposals/{proposal_id}")
+        res = await self._c._get(f"/cosmos/gov/v1/proposals/{proposal_id}")
         return Proposal.from_data(res.get("proposal"))
 
     # keep it private
     async def __search_submit_proposal(self, proposal_id: int):
         params = [
-            ("message.action", "/cosmos.gov.v1beta1.MsgSubmitProposal"),
+            ("message.action", "/cosmos.gov.v1.MsgSubmitProposal"),
             ("submit_proposal.proposal_id", proposal_id),
         ]
 
@@ -68,7 +68,7 @@ class AsyncGovAPI(BaseAsyncAPI):
         self, proposal_id: int, params: Optional[APIParams] = None
     ):
         events = [
-            ("message.action", "/cosmos.gov.v1beta1.MsgDeposit"),
+            ("message.action", "/cosmos.gov.v1.MsgDeposit"),
             ("proposal_deposit.proposal_id", proposal_id),
         ]
         if params is not None:
@@ -113,7 +113,7 @@ class AsyncGovAPI(BaseAsyncAPI):
         res = await self.__search_submit_proposal(proposal_id)
         msgs = res["body"]["messages"]
         for msg in msgs:
-            if msg.get("@type") == "/cosmos.gov.v1beta1.MsgSubmitProposal":
+            if msg.get("@type") == "/cosmos.gov.v1.MsgSubmitProposal":
                 return msg["proposer"]
         return None
 
@@ -133,7 +133,7 @@ class AsyncGovAPI(BaseAsyncAPI):
             or status == ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD.name
         ):
             res = await self._c._get(
-                f"/cosmos/gov/v1beta1/proposals/{proposal_id}/deposits", params
+                f"/cosmos/gov/v1/proposals/{proposal_id}/deposits", params
             )
             return [Deposit.from_data(d) for d in res.get("deposits")]
 
@@ -141,10 +141,30 @@ class AsyncGovAPI(BaseAsyncAPI):
         deposits = []
         for tx in res:
             for msg in tx.get("body").get("messages"):
-                if msg.get("@type") == "/cosmos.gov.v1beta1.MsgDeposit":
+                if msg.get("@type") == "/cosmos.gov.v1.MsgDeposit":
                     deposits.append(Deposit.from_data(msg))
         return deposits, pagination
 
+    async def vote(self, proposal_id: int, voter_addr: str):
+        """Fetches the registered vote that this address made for a proposal.
+
+        Args:
+            proposal_id (int): proposal ID
+            voter_addr: the wallet address
+        """
+
+        # If no vote has been made on this proposal, it will return an error
+        try:
+            res = await self._c._get(
+                f"/cosmos/gov/v1/proposals/{proposal_id}/votes/{voter_addr}"
+            )
+
+            vote = res.get('vote')
+        except:
+            vote = {}
+
+        return vote
+    
     async def votes(self, proposal_id: int, params: Optional[APIParams] = None):
         """Fetches the votes for a proposal.
 
@@ -156,7 +176,7 @@ class AsyncGovAPI(BaseAsyncAPI):
         proposal = self.proposal(proposal_id)
         if proposal.status == ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD:
             res = await self._c._get(
-                f"/cosmos/gov/v1beta1/proposals/{proposal_id}/votes", params
+                f"/cosmos/gov/v1/proposals/{proposal_id}/votes", params
             )
             return res.get("votes"), res.get("pagination")
 
@@ -165,12 +185,12 @@ class AsyncGovAPI(BaseAsyncAPI):
         for tx in res:
             for msg in tx.get("body").get("messages"):
                 if (
-                    msg.get("@type") == "/cosmos.gov.v1beta1.MsgVote"
+                    msg.get("@type") == "/cosmos.gov.v1.MsgVote"
                     and msg.get("proposal_id") == proposal_id
                 ):
                     votes.append(WeightedVoteOption(msg.get("option"), 1))
                 elif (
-                    msg.get("@type") == "/cosmos.gov.v1beta1.MsgVoteWeighted"
+                    msg.get("@type") == "/cosmos.gov.v1.MsgVoteWeighted"
                     and msg.get("proposal_id") == proposal_id
                 ):
                     votes.append(
@@ -188,7 +208,7 @@ class AsyncGovAPI(BaseAsyncAPI):
         Args:
             proposal_id (int): proposal ID
         """
-        res = await self._c._get(f"/cosmos/gov/v1beta1/proposals/{proposal_id}/tally")
+        res = await self._c._get(f"/cosmos/gov/v1/proposals/{proposal_id}/tally")
         return res.get("tally")
 
     async def deposit_parameters(self) -> dict:
@@ -197,7 +217,7 @@ class AsyncGovAPI(BaseAsyncAPI):
         Returns:
             dict: deposit parameters
         """
-        result = await self._c._get("/cosmos/gov/v1beta1/params/deposit")
+        result = await self._c._get("/cosmos/gov/v1/params/deposit")
         params = result.get("deposit_params")
         return {
             "max_deposit_period": params["max_deposit_period"],
@@ -210,7 +230,7 @@ class AsyncGovAPI(BaseAsyncAPI):
         Returns:
             dict: voting parameters
         """
-        result = await self._c._get("/cosmos/gov/v1beta1/params/voting")
+        result = await self._c._get("/cosmos/gov/v1/params/voting")
         return result.get("voting_params")
 
     async def tally_parameters(self) -> dict:
@@ -219,7 +239,7 @@ class AsyncGovAPI(BaseAsyncAPI):
         Returns:
             dict: tally parameters
         """
-        result = await self._c._get("/cosmos/gov/v1beta1/params/tallying")
+        result = await self._c._get("/cosmos/gov/v1/params/tallying")
         params = result.get("tally_params")
         return {
             "quorum": Dec(params["quorum"]),
@@ -264,6 +284,12 @@ class GovAPI(AsyncGovAPI):
         pass
 
     deposits.__doc__ = AsyncGovAPI.deposits.__doc__
+
+    @sync_bind(AsyncGovAPI.vote)
+    def vote(self, proposal_id: int, voter_addr: str):
+        pass
+
+    vote.__doc__ = AsyncGovAPI.vote.__doc__
 
     @sync_bind(AsyncGovAPI.votes)
     def votes(self, proposal_id: int, params: Optional[APIParams] = None):

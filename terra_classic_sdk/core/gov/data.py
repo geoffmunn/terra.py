@@ -77,19 +77,19 @@ class Proposal(JSONSerializable):
     final_tally_result: TallyResult = attr.ib()
     """Final tallied result of the proposal (after vote)."""
 
-    submit_time: datetime = attr.ib(converter=parser.parse)
+    submit_time: datetime = attr.ib()
     """Timestamp at which proposal was submitted."""
 
-    deposit_end_time: datetime = attr.ib(converter=parser.parse)
+    deposit_end_time: datetime = attr.ib()
     """Time at which the deposit period ended, or will end."""
 
     total_deposit: Coins = attr.ib(converter=Coins)
     """Total amount deposited for proposal"""
 
-    voting_start_time: datetime = attr.ib(converter=parser.parse)
+    voting_start_time: datetime = attr.ib()
     """Time at which voting period started, or will start."""
 
-    voting_end_time: datetime = attr.ib(converter=parser.parse)
+    voting_end_time: datetime = attr.ib()
     """Time at which voting period ended, or will end."""
 
     def to_amino(self) -> dict:
@@ -107,16 +107,27 @@ class Proposal(JSONSerializable):
 
     @classmethod
     def from_data(cls, data: dict) -> Proposal:
+
+        if data["voting_start_time"] is None:
+            voting_start_time = ""
+        else:    
+            voting_start_time = parser.parse(str(data["voting_start_time"]))
+        
+        if data["voting_end_time"] is None:
+            voting_end_time = ""
+        else:
+            voting_end_time = parser.parse(str(data["voting_end_time"]))
+
         return cls(
-            proposal_id=data["proposal_id"],
-            content=parse_content(data["content"]),
+            proposal_id=data["id"],
+            content=parse_content(data['messages'][0]["content"]),
             status=data["status"],
             final_tally_result=data["final_tally_result"],
             submit_time=parser.parse(data["submit_time"]),
             deposit_end_time=parser.parse(data["deposit_end_time"]),
             total_deposit=Coins.from_data(data["total_deposit"]),
-            voting_start_time=parser.parse(data["voting_start_time"]),
-            voting_end_time=parser.parse(data["voting_end_time"]),
+            voting_start_time=voting_start_time,
+            voting_end_time=voting_end_time
         )
 
     def to_proto(self) -> Proposal_pb:

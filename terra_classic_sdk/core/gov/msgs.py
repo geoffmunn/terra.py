@@ -221,7 +221,9 @@ class MsgVote(Msg):
 
     def to_proto(self) -> MsgVote_pb:
         return MsgVote_pb(
-            proposal_id=self.proposal_id, voter=self.voter, options=self.option
+            proposal_id=self.proposal_id, 
+            voter=self.voter, 
+            option=self.option
         )
 
     @classmethod

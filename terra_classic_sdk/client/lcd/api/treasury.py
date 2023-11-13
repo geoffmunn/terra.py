@@ -42,7 +42,7 @@ class AsyncTreasuryAPI(BaseAsyncAPI):
         Returns:
             Dec: reward weight
         """
-        res = await self._c._get("//terra/treasury/v1beta1/reward_weight")
+        res = await self._c._get("/terra/treasury/v1beta1/reward_weight")
         return Dec(res.get("reward_weight"))
 
     async def tax_proceeds(self) -> Coins:

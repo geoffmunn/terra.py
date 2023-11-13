@@ -19,12 +19,12 @@ import sphinx_rtd_theme
 
 # -- Project information -----------------------------------------------------
 
-project = "Terra SDK"
-copyright = "2021, Terraform Labs, PTE."
-author = "Terraform Labs, PTE."
+project = "Terra Classic SDK"
+copyright = "License: CC-BY-SA-4.0"
+author = "Geoff Munn"
 
 # The full version, including alpha/beta/rc tags
-release = "2.0.3"
+release = "2.0.4"
 
 
 # -- General configuration ---------------------------------------------------

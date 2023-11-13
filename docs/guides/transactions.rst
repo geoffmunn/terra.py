@@ -33,27 +33,36 @@ correspond to the account you intend to sign the transaction with.
     from terra_classic_sdk.client.lcd import LCDClient
     from terra_classic_sdk.key.mnemonic import MnemonicKey
 
+    # Create a basic wallet
     mk = MnemonicKey(mnemonic=MNEMONIC) 
     terra = LCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5")
     wallet = terra.wallet(mk)
 
+    print (wallet.account_number())
 
 Once you have your Wallet, you can simply create a StdTx using :meth:`Wallet.create_and_sign_tx`.
 
 .. code-block:: python
 
+    from terra_classic_sdk.client.lcd import LCDClient
     from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions
     from terra_classic_sdk.core.fee import Fee
     from terra_classic_sdk.core.bank import MsgSend
+    from terra_classic_sdk.key.mnemonic import MnemonicKey
 
+    # Create a basic wallet
+    mk = MnemonicKey(mnemonic=MNEMONIC) 
+    terra = LCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5")
+    wallet = terra.wallet(mk)
+
+    # Build a transaction
     tx = wallet.create_and_sign_tx(
         CreateTxOptions(
             msgs=[MsgSend(
                 wallet.key.acc_address,
                 RECIPIENT,
                 "1000000uluna" # send 1 luna
-            )]
-            ,
+            )],
             memo="test transaction!",
             fee=Fee(200000, "120000uluna")
         )
@@ -63,6 +72,31 @@ And that's it! You should now be able to broadcast your transaction to the netwo
 
 .. code-block:: python
 
+    from terra_classic_sdk.client.lcd import LCDClient
+    from terra_classic_sdk.client.lcd.api.tx import CreateTxOptions
+    from terra_classic_sdk.core.fee import Fee
+    from terra_classic_sdk.core.bank import MsgSend
+    from terra_classic_sdk.key.mnemonic import MnemonicKey
+
+    # Create a basic wallet
+    mk = MnemonicKey(mnemonic=MNEMONIC) 
+    terra = LCDClient("https://terra-classic-lcd.publicnode.com", "columbus-5")
+    wallet = terra.wallet(mk)
+
+    # Build a transaction
+    tx = wallet.create_and_sign_tx(
+        CreateTxOptions(
+            msgs=[MsgSend(
+                wallet.key.acc_address,
+                RECIPIENT,
+                "1000000uluna" # send 1 luna
+            )],
+            memo="test transaction!",
+            fee=Fee(200000, "120000uluna")
+        )
+    )
+
+    # Broadcast it and make it official
     result = terra.tx.broadcast(tx)
     print(result)
 

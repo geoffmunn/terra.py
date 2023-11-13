@@ -32,6 +32,11 @@ The Terra Classic Software Development Kit (SDK) in Python is a simple library t
 
 ## Recent changes
 
+### 2.1.2
+- Governance voting and proposal analysis now works
+- Governance APIs updated to version 1
+- Documentation reviewed and updated
+
 ### 2.1.1
 - Better Osmosis support. Pools can now be requested by pool ID, or the entire list can be requested.
 

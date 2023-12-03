@@ -32,6 +32,9 @@ The Terra Classic Software Development Kit (SDK) in Python is a simple library t
 
 ## Recent changes
 
+### 2.1.3
+- All packages have been upgraded to the latest version, except for betterproto which is already on a pre-release version.
+
 ### 2.1.2
 - Governance voting and proposal analysis now works
 - Governance APIs updated to version 1

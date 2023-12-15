@@ -16,8 +16,7 @@ from .data import (
     SwapAmountOutRoute
 )
 
-from .pools.pool import Pool
-from terra_proto.osmosis.gamm.v1beta1 import PoolParams, PoolAsset
+from terra_proto.osmosis.gamm.v1beta1 import Pool, PoolParams, PoolAsset 
 
 __all__ = [
     "MsgJoinPool",

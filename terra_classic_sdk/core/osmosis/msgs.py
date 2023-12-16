@@ -52,7 +52,7 @@ class MsgJoinPool(Msg):
 
     type_amino = "osmosis/Msg/JoinPool"
     """"""
-    type_url = "/osmosis.gamm.v1beta1.Msg/JoinPool"
+    type_url = "/osmosis.gamm.v1beta1.MsgJoinPool"
     """"""
     prototype = MsgJoinPool_pb
     """"""
@@ -305,7 +305,7 @@ class MsgJoinSwapExternAmountIn(Msg):
 
     type_amino = "osmosis/JoinSwapExternAmountIn"
     """"""
-    type_url = "/osmosis.gamm.v1beta1.Msg/JoinSwapExternAmountIn"
+    type_url = "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn"
     """"""
     prototype = MsgJoinSwapExternAmountIn_pb
     """"""

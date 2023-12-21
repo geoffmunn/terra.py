@@ -300,7 +300,7 @@ class MsgJoinSwapExternAmountIn(Msg):
         sender: address of sender
         pool_id: pool id
         token_in: token to swap in
-        shares_out_min_amount: minimum amount of shares to swap out
+        share_out_min_amount: minimum amount of shares to swap out
     """
 
     type_amino = "osmosis/JoinSwapExternAmountIn"
@@ -313,7 +313,7 @@ class MsgJoinSwapExternAmountIn(Msg):
     sender: AccAddress = attr.ib()
     pool_id: int = attr.ib()
     token_in: Coin = attr.ib(converter=Coin)
-    shares_out_min_amount: str = attr.ib()
+    share_out_min_amount: str = attr.ib()
 
     def to_amino(self) -> dict:
         return {
@@ -322,7 +322,7 @@ class MsgJoinSwapExternAmountIn(Msg):
                 "sender": self.sender,
                 "pool_id": self.pool_id,
                 "token_in": self.token_in.to_amino(),
-                "shares_out_min_amount": self.shares_out_min_amount,
+                "share_out_min_amount": self.share_out_min_amount,
             },
         }
 
@@ -332,7 +332,7 @@ class MsgJoinSwapExternAmountIn(Msg):
             sender=data["sender"],
             pool_id=data["pool_id"],
             token_in=Coin.from_data(data["token_in"]),
-            shares_out_min_amount=data["shares_out_min_amount"],
+            share_out_min_amount=data["share_out_min_amount"],
         )
 
     def to_proto(self) -> MsgJoinSwapExternAmountIn_pb:
@@ -340,7 +340,7 @@ class MsgJoinSwapExternAmountIn(Msg):
             sender=self.sender,
             pool_id=self.pool_id,
             token_in=self.token_in.to_proto(),
-            shares_out_min_amount=self.shares_out_min_amount,
+            share_out_min_amount=self.share_out_min_amount,
         )
 
     @classmethod
@@ -349,7 +349,7 @@ class MsgJoinSwapExternAmountIn(Msg):
             sender=proto.sender,
             pool_id=proto.pool_id,
             token_in=Coin.from_proto(proto.token_in),
-            shares_out_min_amount=proto.shares_out_min_amount,
+            share_out_min_amount=proto.share_out_min_amount,
         )
 
 

@@ -130,7 +130,7 @@ class MsgExitPool(Msg):
                 "sender": self.sender,
                 "pool_id": self.pool_id,
                 "share_in_amount": self.share_in_amount(),
-                "coins": self.token_out_mins.to_amino(),
+                "token_out_mins": self.token_out_mins.to_amino(),
             },
         }
 
@@ -140,7 +140,7 @@ class MsgExitPool(Msg):
             sender=data.get("sender"),
             pool_id=data.get("pool_id"),
             share_in_amount=data.get("share_in_amount"),
-            coins=Coins.from_data(data.get("funds")),
+            token_out_mins=Coins.from_data(data.get("token_out_mins"))
         )
 
     def to_proto(self) -> MsgExitPool_pb:

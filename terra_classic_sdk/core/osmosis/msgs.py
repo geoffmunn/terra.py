@@ -113,7 +113,7 @@ class MsgExitPool(Msg):
 
     type_amino = "osmosis/Msg/JoinPool"
     """"""
-    type_url = "/osmosis.gamm.v1beta1.Msg/ExitPool"
+    type_url = "/osmosis.gamm.v1beta1.MsgExitPool"
     """"""
     prototype = MsgExitPool_pb
     """"""

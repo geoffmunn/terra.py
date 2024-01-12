@@ -19,7 +19,7 @@ from terra_proto.osmosis.gamm.v1beta1 import MsgExitSwapExternAmountOut as MsgEx
 from terra_proto.osmosis.gamm.v1beta1 import MsgExitSwapShareAmountIn as MsgExitSwapShareAmountIn_pb
 
 from terra_classic_sdk.core.osmosis.data import SwapAmountInRoute, SwapAmountOutRoute
-from terra_classic_sdk.core import AccAddress, Coins, Coin
+from terra_classic_sdk.core import AccAddress, Coin, Coins
 from terra_classic_sdk.core.msg import Msg
 from terra_classic_sdk.util.remove_none import remove_none
 
@@ -312,7 +312,7 @@ class MsgJoinSwapExternAmountIn(Msg):
 
     sender: AccAddress = attr.ib()
     pool_id: int = attr.ib()
-    token_in: Coin = attr.ib(converter=Coin)
+    token_in: Coin = attr.ib()
     share_out_min_amount: str = attr.ib()
 
     def to_amino(self) -> dict:
@@ -336,10 +336,11 @@ class MsgJoinSwapExternAmountIn(Msg):
         )
 
     def to_proto(self) -> MsgJoinSwapExternAmountIn_pb:
+        token_coin:Coin = Coin(denom=self.token_in['denom'], amount=self.token_in['amount'])
         return MsgJoinSwapExternAmountIn_pb(
             sender=self.sender,
             pool_id=self.pool_id,
-            token_in=self.token_in.to_proto(),
+            token_in = token_coin.to_proto(),
             share_out_min_amount=self.share_out_min_amount,
         )
 

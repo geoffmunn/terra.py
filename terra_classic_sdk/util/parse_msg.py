@@ -66,9 +66,10 @@ from terra_classic_sdk.core.crisis import (
 )
 
 from terra_classic_sdk.core.osmosis import (
-    MsgSwapExactAmountIn,
+    MsgExitPool,
     MsgJoinPool,
-    MsgJoinSwapExternAmountIn,
+    MsgSwapExactAmountIn,
+    MsgJoinSwapExternAmountIn
 )
 
 bank_msgs = [MsgSend, MsgMultiSend]
@@ -137,6 +138,7 @@ crisis_msgs = [
 ]
 
 osmosis_msgs = [
+    MsgExitPool,
     MsgJoinPool,
     MsgJoinSwapExternAmountIn,
     MsgSwapExactAmountIn,

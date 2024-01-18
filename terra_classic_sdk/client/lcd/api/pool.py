@@ -3,7 +3,7 @@ from typing import Optional
 from ._base import BaseAsyncAPI, sync_bind
 
 from terra_classic_sdk.client.lcd.params import PaginationOptions
-from terra_classic_sdk.core.osmosis import Pool
+from terra_classic_sdk.core.osmosis import Pool, PoolParams
 
 __all__ = ["AsyncPoolAPI", "PoolAPI"]
 
@@ -25,6 +25,24 @@ class AsyncPoolAPI(BaseAsyncAPI):
         pool_details:Pool = Pool.from_data(res['pool'])
 
         return pool_details
+    
+    async def osmosis_pool_params(self, pool_id: int) -> Pool:
+        """Fetches the pool parameter details based on the pool ID.
+        This is specifically designed for Osmosis pools, and requires an Osmosis LCD to work.
+
+        Args:
+            pool_id (int): the pool id
+
+        Returns:
+            PoolParams: pool parameterinfo
+        """
+
+        res = await self._c._get(f"osmosis/gamm/v1beta1/pools/{pool_id}/params")
+
+        # Load the result into a PoolParams object
+        param_details:PoolParams = PoolParams.from_data(res['pool'])
+
+        return param_details
     
     async def osmosis_pools(self) -> list:
         """Fetches all the available pools.
@@ -68,6 +86,12 @@ class PoolAPI(AsyncPoolAPI):
         pass
 
     osmosis_pool.__doc__ = AsyncPoolAPI.osmosis_pool.__doc__
+
+    @sync_bind(AsyncPoolAPI.osmosis_pool_params)
+    def osmosis_pool_params(self, pool_id: int) -> Pool:
+        pass
+
+    osmosis_pool_params.__doc__ = AsyncPoolAPI.osmosis_pool_params.__doc__
 
     @sync_bind(AsyncPoolAPI.osmosis_pools)
     def osmosis_pools(self) -> list:

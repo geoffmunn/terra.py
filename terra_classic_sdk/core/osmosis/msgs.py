@@ -19,7 +19,7 @@ from terra_proto.osmosis.gamm.v1beta1 import MsgExitSwapExternAmountOut as MsgEx
 from terra_proto.osmosis.gamm.v1beta1 import MsgExitSwapShareAmountIn as MsgExitSwapShareAmountIn_pb
 
 from terra_classic_sdk.core.osmosis.data import SwapAmountInRoute, SwapAmountOutRoute
-from terra_classic_sdk.core import AccAddress, Coins, Coin
+from terra_classic_sdk.core import AccAddress, Coin, Coins
 from terra_classic_sdk.core.msg import Msg
 from terra_classic_sdk.util.remove_none import remove_none
 
@@ -52,7 +52,7 @@ class MsgJoinPool(Msg):
 
     type_amino = "osmosis/Msg/JoinPool"
     """"""
-    type_url = "/osmosis.gamm.v1beta1.Msg/JoinPool"
+    type_url = "/osmosis.gamm.v1beta1.MsgJoinPool"
     """"""
     prototype = MsgJoinPool_pb
     """"""
@@ -113,7 +113,7 @@ class MsgExitPool(Msg):
 
     type_amino = "osmosis/Msg/JoinPool"
     """"""
-    type_url = "/osmosis.gamm.v1beta1.Msg/ExitPool"
+    type_url = "/osmosis.gamm.v1beta1.MsgExitPool"
     """"""
     prototype = MsgExitPool_pb
     """"""
@@ -130,7 +130,7 @@ class MsgExitPool(Msg):
                 "sender": self.sender,
                 "pool_id": self.pool_id,
                 "share_in_amount": self.share_in_amount(),
-                "coins": self.token_out_mins.to_amino(),
+                "token_out_mins": self.token_out_mins.to_amino(),
             },
         }
 
@@ -140,7 +140,7 @@ class MsgExitPool(Msg):
             sender=data.get("sender"),
             pool_id=data.get("pool_id"),
             share_in_amount=data.get("share_in_amount"),
-            coins=Coins.from_data(data.get("funds")),
+            token_out_mins=Coins.from_data(data.get("token_out_mins"))
         )
 
     def to_proto(self) -> MsgExitPool_pb:
@@ -300,20 +300,20 @@ class MsgJoinSwapExternAmountIn(Msg):
         sender: address of sender
         pool_id: pool id
         token_in: token to swap in
-        shares_out_min_amount: minimum amount of shares to swap out
+        share_out_min_amount: minimum amount of shares to swap out
     """
 
     type_amino = "osmosis/JoinSwapExternAmountIn"
     """"""
-    type_url = "/osmosis.gamm.v1beta1.Msg/JoinSwapExternAmountIn"
+    type_url = "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn"
     """"""
     prototype = MsgJoinSwapExternAmountIn_pb
     """"""
 
     sender: AccAddress = attr.ib()
     pool_id: int = attr.ib()
-    token_in: Coin = attr.ib(converter=Coin)
-    shares_out_min_amount: str = attr.ib()
+    token_in: Coin = attr.ib()
+    share_out_min_amount: str = attr.ib()
 
     def to_amino(self) -> dict:
         return {
@@ -322,7 +322,7 @@ class MsgJoinSwapExternAmountIn(Msg):
                 "sender": self.sender,
                 "pool_id": self.pool_id,
                 "token_in": self.token_in.to_amino(),
-                "shares_out_min_amount": self.shares_out_min_amount,
+                "share_out_min_amount": self.share_out_min_amount,
             },
         }
 
@@ -332,15 +332,16 @@ class MsgJoinSwapExternAmountIn(Msg):
             sender=data["sender"],
             pool_id=data["pool_id"],
             token_in=Coin.from_data(data["token_in"]),
-            shares_out_min_amount=data["shares_out_min_amount"],
+            share_out_min_amount=data["share_out_min_amount"],
         )
 
     def to_proto(self) -> MsgJoinSwapExternAmountIn_pb:
+        token_coin:Coin = Coin(denom=self.token_in['denom'], amount=self.token_in['amount'])
         return MsgJoinSwapExternAmountIn_pb(
             sender=self.sender,
             pool_id=self.pool_id,
-            token_in=self.token_in.to_proto(),
-            shares_out_min_amount=self.shares_out_min_amount,
+            token_in = token_coin.to_proto(),
+            share_out_min_amount=self.share_out_min_amount,
         )
 
     @classmethod
@@ -349,7 +350,7 @@ class MsgJoinSwapExternAmountIn(Msg):
             sender=proto.sender,
             pool_id=proto.pool_id,
             token_in=Coin.from_proto(proto.token_in),
-            shares_out_min_amount=proto.shares_out_min_amount,
+            share_out_min_amount=proto.share_out_min_amount,
         )
 
 

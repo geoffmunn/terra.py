@@ -1,7 +1,7 @@
 <br/>
 <br/>
 
-<div  align="center"> <p > <img src="https://raw.githubusercontent.com/terra-money/terra-sdk-python/main/docs/img/logo.png" width=500 alt="py-sdk-logo"></p>
+<div  align="center"> <p > <img src="https://raw.githubusercontent.com/geoffmunn/terra.py/main/docs/img/logo.png" width=500 alt="py-sdk-logo"></p>
 
 The Python SDK for Terra Classic
 <br/>

@@ -32,6 +32,10 @@ The Terra Classic Software Development Kit (SDK) in Python is a simple library t
 
 ## Recent changes
 
+### 2.1.4
+- Liquidity pool support added, you can now join and exit liquidity pools on Osmosis
+ - This is specifically matched with terra.proto version 3.1.2 
+
 ### 2.1.3
 - All packages have been upgraded to the latest version, except for betterproto which is already on a pre-release version.
 

@@ -14,7 +14,7 @@ classifiers = [
 description = "The Python SDK for Terra Classic"
 documentation = "https://terra-money.github.io/terra.py/index.html"
 homepage = "https://github.com/geoffmunn/terra.py"
-keywords = ["jigu", "blockchain", "terra", "terra classic", "lunc", "defi", "crypto", "luna classic"]
+keywords = ["blockchain", "terra", "terra classic", "lunc", "crypto", "luna classic", "osmosis", "crypto sdk", "blockchain sdk"]
 license = "MIT"
 packages = [{ include = "terra_classic_sdk" }]
 readme = "README.md"

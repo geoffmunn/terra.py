@@ -84,7 +84,8 @@ class MsgUpdateClient(Msg):
     @classmethod
     def from_data(cls, data: dict) -> MsgUpdateClient:
         return cls(
-            client_id=data["client_id"], header=data["header"], signer=data["signer"]
+            #client_id=data["client_id"], header=data["header"], signer=data["signer"]
+            client_id=data["client_id"], header=data["client_message"]["signed_header"]["header"], signer=data["signer"]
         )
 
     def to_proto(self) -> MsgUpdateClient_pb:

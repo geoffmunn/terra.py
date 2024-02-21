@@ -69,6 +69,7 @@ from terra_classic_sdk.core.osmosis import (
     MsgExitPool,
     MsgJoinPool,
     MsgSwapExactAmountIn,
+    MsgSwapExactAmountOut,
     MsgJoinSwapExternAmountIn
 )
 
@@ -142,6 +143,7 @@ osmosis_msgs = [
     MsgJoinPool,
     MsgJoinSwapExternAmountIn,
     MsgSwapExactAmountIn,
+    MsgSwapExactAmountOut
 ]
 
 parse_msg = create_demux(

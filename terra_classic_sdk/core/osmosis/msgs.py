@@ -243,7 +243,7 @@ class MsgSwapExactAmountOut(Msg):
 
     type_amino = "wasm/SwapExactAmountOut"
     """"""
-    type_url = "/osmosis.gamm.v1beta1.Msg/SwapExactAmountOut"
+    type_url = "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut"
     """"""
     prototype = MsgSwapExactAmountOut_pb
     """"""
@@ -266,9 +266,13 @@ class MsgSwapExactAmountOut(Msg):
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSwapExactAmountOut:
+        pool_routes:list = []
+        for route in data['routes']:
+            pool_routes.append(SwapAmountInRoute.from_data[route])
+
         return cls(
             sender=data["sender"],
-            routes=SwapAmountInRoute.from_data(data["routes"]),
+            routes = pool_routes,
             token_in_max_amount=data["token_in_max_amount"],
             token_out=Coin.from_data(data["token_out"]),
         )

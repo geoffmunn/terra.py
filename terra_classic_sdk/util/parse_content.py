@@ -4,6 +4,8 @@ from terra_classic_sdk.core.distribution.proposals import CommunityPoolSpendProp
 from terra_classic_sdk.core.gov.proposals import TextProposal
 from terra_classic_sdk.core.params.proposals import ParameterChangeProposal
 from terra_classic_sdk.core.ibc.proposals import ClientUpdateProposal
+from terra_classic_sdk.core.wasm.proposals import MigrateContractProposal
+
 from terra_classic_sdk.core.upgrade import (
     CancelSoftwareUpgradeProposal,
     SoftwareUpgradeProposal,
@@ -28,7 +30,8 @@ Content = Union[
     SoftwareUpgradeProposal,
     CancelSoftwareUpgradeProposal,
     ClientUpdateProposal,
-    UpdateAdminProposal
+    UpdateAdminProposal,
+    MigrateContractProposal
 ]
 
 parse_content = create_demux(
@@ -39,7 +42,8 @@ parse_content = create_demux(
         SoftwareUpgradeProposal,
         CancelSoftwareUpgradeProposal,
         ClientUpdateProposal,
-        UpdateAdminProposal
+        UpdateAdminProposal,
+        MigrateContractProposal
     ]
 )
 
@@ -51,7 +55,8 @@ parse_content_proto = create_demux_proto(
         SoftwareUpgradeProposal,
         CancelSoftwareUpgradeProposal,
         ClientUpdateProposal,
-        UpdateAdminProposal
+        UpdateAdminProposal,
+        MigrateContractProposal
     ]
 )
 """

@@ -1,4 +1,4 @@
 .DS_Store
 dist/.DS_Store
-dist/.DS_Store
+test/.DS_Store
 *.pyc

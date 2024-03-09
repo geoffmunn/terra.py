@@ -1,9 +1,9 @@
 [{
-    "type": "msgauth/MsgExecAuthorized",
+    "@type": "/cosmos.authz.v1beta1.MsgExec",
     "value": {
         "grantee": "terra...",
         "msgs": [{
-            "type": "bank/MsgSend",
+            "@type": "/cosmos.bank.v1beta1.MsgSend",
             "value": {
                 "from_address": "terra...",
                 "to_address": "terra...",
@@ -13,7 +13,7 @@
                 }]
             }
         }, {
-            "type": "market/MsgSwap",
+            "@type": "/terra.market.v1beta1.MsgSwap",
             "value": {
                 "trader": "terra...",
                 "offer_coin": {

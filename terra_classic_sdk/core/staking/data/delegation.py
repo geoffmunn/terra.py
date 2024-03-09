@@ -123,7 +123,7 @@ class UnbondingDelegationEntry(JSONSerializable):
     def from_data(cls, data: dict) -> UnbondingDelegationEntry:
        
         # The date needs to be formatted as a string. Add extra timezone details if required
-        date:str = parser.parse(data['completion_time']).strftime('%Y-%m-%d %H:%M:%S')
+        date:str = parser.parse(data['completion_time']).strftime('%Y-%m-%d %H:%M:%S.%fZ')
         
         return cls(
             initial_balance=data["initial_balance"],
@@ -183,7 +183,6 @@ class UnbondingDelegation(JSONSerializable):
             validator_address=self.validator_address,
             entries=[entry.to_proto() for entry in self.entries],
         )
-
 
 @attr.s
 class RedelegationEntryInfo(JSONSerializable):
@@ -251,7 +250,7 @@ class RedelegationEntry(JSONSerializable):
                 "initial_balance": str(self.redelegation_entry.initial_balance),
                 "shares_dst": str(self.redelegation_entry.shares_dst),
                 "creation_height": self.redelegation_entry.creation_height,
-                "completion_time": self.redelegation_entry.completion_time,
+                "completion_time": to_isoformat(self.redelegation_entry.completion_time),
             },
             "balance": str(self.balance),
         }

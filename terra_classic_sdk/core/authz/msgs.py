@@ -50,14 +50,16 @@ class MsgExecAuthorized(Msg):
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
-            "grantee": self.grantee,
-            "msgs": [msg.to_data() for msg in self.msgs],
+            "value": {
+                "grantee": self.grantee,
+                "msgs": [msg.to_data() for msg in self.msgs],
+            }
         }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgExecAuthorized:
         return cls(
-            grantee=data["grantee"], msgs=[Msg.from_data(md) for md in data["msgs"]]
+            grantee=data['value']['grantee'], msgs=[Msg.from_data(md) for md in data['value']['msgs']]
         )
 
     def to_proto(self) -> MsgExec_pb:
@@ -116,17 +118,19 @@ class MsgGrantAuthorization(Msg):
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
-            "granter": self.granter,
-            "grantee": self.grantee,
-            "grant": self.grant.to_data(),
+            "value": {
+                "granter": self.granter,
+                "grantee": self.grantee,
+                "grant": self.grant.to_data(),
+            }
         }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgGrantAuthorization:
         return cls(
-            granter=data["granter"],
-            grantee=data["grantee"],
-            grant=AuthorizationGrant.from_data(data["grant"])
+            granter=data["value"]["granter"],
+            grantee=data["value"]["grantee"],
+            grant=AuthorizationGrant.from_data(data["value"]["grant"])
         )
 
     def to_proto(self) -> MsgGrant_pb:
@@ -186,17 +190,19 @@ class MsgRevokeAuthorization(Msg):
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
-            "granter": self.granter,
-            "grantee": self.grantee,
-            "msg_type_url": self.msg_type_url,
+            "value": {
+                "granter": self.granter,
+                "grantee": self.grantee,
+                "msg_type_url": self.msg_type_url,
+            }
         }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgRevokeAuthorization:
         return cls(
-            granter=data["granter"],
-            grantee=data["grantee"],
-            msg_type_url=data["msg_type_url"],
+            granter=data["value"]["granter"],
+            grantee=data["value"]["grantee"],
+            msg_type_url=data["value"]["msg_type_url"],
         )
 
     def to_proto(self) -> MsgRevoke_pb:

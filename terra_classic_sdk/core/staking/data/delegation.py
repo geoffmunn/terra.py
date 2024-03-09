@@ -69,6 +69,16 @@ class Delegation(JSONSerializable):
             balance=Coin.from_data(data["balance"]),
         )
 
+    def to_data(self) -> dict:
+        return {
+            "delegation": {
+                "delegator_address": self.delegation.delegator_address,
+                "validator_address": self.delegation.validator_address,
+                "shares": str(self.delegation.shares),
+            },
+            "balance": self.balance.to_data(),
+        }
+    
     def to_proto(self) -> DelegationResponse_pb:
         return DelegationResponse_pb(
             delegation=Delegation_pb(
@@ -160,6 +170,13 @@ class UnbondingDelegation(JSONSerializable):
             entries=entries,
         )
 
+    def to_data(self) -> dict:
+        return {
+            "delegator_address": self.delegator_address,
+            "validator_address": self.validator_address,
+            "entries": [entry.to_data() for entry in self.entries],
+        }
+    
     def to_proto(self) -> UnbondingDelegation_pb:
         return UnbondingDelegation_pb(
             delegator_address=self.delegator_address,
@@ -323,6 +340,13 @@ class Redelegation(JSONSerializable):
             ),
             entries=entries,
         )
+    
+    def to_data(self) -> dict:
+        entries = [RedelegationEntry.to_data(re) for re in self.entries]
+        return {
+            "redelegation": self.redelegation.to_data(),
+            "entries": entries
+        }
 
     def to_proto(self) -> Redelegation_pb:
         return Redelegation_pb(

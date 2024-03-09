@@ -93,8 +93,8 @@ class Commission(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict) -> Commission:
         
-        # The date needs to be formatted as a string. Add extra timezone details if required
-        date:str = parser.parse(data['update_time']).strftime('%Y-%m-%d %H:%M:%S')
+        # The date needs to be formatted as a string.
+        date:str = parser.parse(data['update_time']).strftime('%Y-%m-%d %H:%M:%S.%fZ')
         
         return cls(
             commission_rates=CommissionRates.from_data(data["commission_rates"]),
@@ -218,14 +218,62 @@ class Validator(JSONSerializable):
             "commission": self.commission.to_amino(),
             "min_self_delegation": str(self.min_self_delegation),
         }
+    
+    def to_data(self) -> dict:
+        return {
+            "operator_address": self.operator_address,
+            "consensus_pubkey": self.consensus_pubkey,
+            "jailed": self.jailed,
+            "status": self.status,
+            "tokens": str(self.tokens),
+            "delegator_shares": str(self.delegator_shares),
+            "description": self.description.to_amino(),
+            "unbonding_height": str(self.unbonding_height),
+            "unbonding_time": to_isoformat(self.unbonding_time),
+            "commission": self.commission.to_amino(),
+            "min_self_delegation": str(self.min_self_delegation)
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> Validator:
+        #print (data)
+        # {
+        #     #'operator_address': 'terravaloper1ptyzewnns2kn37ewtmv6ppsvhdnmeapvgk6d65', 
+        #     #'consensus_pubkey': 'terravalconspub1zcjduepqtcng29gnnhs8sv6dvv7cc0szyg3mu3tzzzjsw5x3x6pwgd2uqkkqes8fs5', 
+        #     'jailed': False, 
+        #     'status': 2, 
+        #     'tokens': '111401100001', 
+        #     'delegator_shares': '111401100001.000000000000000000', 
+        #     'description': {
+        #         'moniker': 'WeStaking', 
+        #         'identity': 'DA9C5AD3E308E426', 
+        #         'website': 'https://www.westaking.io', 
+        #         'details': 'Delegate your luna to us for the staking rewards. We will do our best as secure and stable validator.',
+        #         'security_contact': ''
+        #     }, 
+        #     'unbonding_height': '0', 
+        #     'unbonding_time': '1970-01-01T00:00:00Z', 
+        #     'commission': {
+        #         'commission_rates': {
+        #             'rate': '0.200000000000000000', 
+        #             'max_rate': '0.250000000000000000', 
+        #             'max_change_rate': '0.010000000000000000'
+        #         }, 
+        #         'update_time': '2019-12-01T03:28:34.024363013Z'
+        #     }, 
+        #     'min_self_delegation': '1'
+        # }
+        #rint(data["status"])
+
+        #test:BondStatus = BondStatus.BOND_STATUS_UNBONDED
+        #print ('test:', BondStatus.from_string(test))
+
         return cls(
             operator_address=data["operator_address"],
             consensus_pubkey=data["consensus_pubkey"],
             jailed=data.get("jailed"),
-            status=BondStatus.from_string(data["status"]),
+            #status=BondStatus.from_string(int(data["status"])),
+            status=data.get("status"),
             tokens=data["tokens"],
             delegator_shares=data["delegator_shares"],
             description=Description.from_data(data["description"]),

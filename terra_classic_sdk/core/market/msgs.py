@@ -58,9 +58,9 @@ class MsgSwap(Msg):
     @classmethod
     def from_data(cls, data: dict) -> MsgSwap:
         return cls(
-            trader=data["trader"],
-            offer_coin=Coin.from_data(data["offer_coin"]),
-            ask_denom=data["ask_denom"],
+            trader=data['value']['trader'],
+            offer_coin=Coin.from_data(data['value']['offer_coin']),
+            ask_denom=data['value']['ask_denom'],
         )
 
     def to_proto(self) -> MsgSwap_pb:

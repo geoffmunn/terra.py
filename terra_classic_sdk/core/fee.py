@@ -34,6 +34,15 @@ class Fee(JSONSerializable):
         return {"gas": str(self.gas_limit), "amount": self.amount.to_amino()}
 
     @classmethod
+    def from_amino(cls, data: dict) -> Fee:
+        return cls(
+            int(data["gas_limit"]),
+            Coins.from_amino(data["amount"]),
+            data["payer"],
+            data["granter"],
+        )
+    
+    @classmethod
     def from_data(cls, data: dict) -> Fee:
         return cls(
             int(data["gas_limit"]),

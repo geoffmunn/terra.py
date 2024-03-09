@@ -10,25 +10,25 @@ pagOpt = PaginationOptions(limit=1, count_total=True)
 
 def test_delegations():
     result = terra.staking.delegations(
-        validator="terravaloper1rdkyl03zd4d2g8hlchf0cmpwty2et4vfdjlaef",
+        validator="terravaloper17460j07rlktalgkll35zvz0efv60mv79m25hat",
         delegator=None,
         params=pagOpt,
     )
     assert result is not None
     result = terra.staking.delegations(
         validator=None,
-        delegator="terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
+        delegator="terra1em3qvwh0y6zd63pjmdppy3ztj0c6vyg6ek2rh9",
         params=pagOpt,
     )
     assert result is not None
     result = terra.staking.delegations(
-        validator="terravaloper1rdkyl03zd4d2g8hlchf0cmpwty2et4vfdjlaef",
-        delegator="terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
+        validator="terravaloper17460j07rlktalgkll35zvz0efv60mv79m25hat",
+        delegator="terra1em3qvwh0y6zd63pjmdppy3ztj0c6vyg6ek2rh9",
     )
     assert result is not None
     result = terra.staking.delegation(
-        validator="terravaloper1rdkyl03zd4d2g8hlchf0cmpwty2et4vfdjlaef",
-        delegator="terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v",
+        validator="terravaloper17460j07rlktalgkll35zvz0efv60mv79m25hat",
+        delegator="terra1em3qvwh0y6zd63pjmdppy3ztj0c6vyg6ek2rh9",
     )
     assert result is not None
 
@@ -38,12 +38,12 @@ def test_unbonding():
     #                                              delegator='terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp')
     # assert(result is not None)
     result = terra.staking.unbonding_delegations(
-        validator="terravaloper1vk20anceu6h9s00d27pjlvslz3avetkvnwmr35", delegator=None
+        validator="terravaloper17460j07rlktalgkll35zvz0efv60mv79m25hat", delegator=None
     )
     assert result is not None
     result = terra.staking.unbonding_delegations(
         validator=None,
-        delegator="terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp",
+        delegator="terra1em3qvwh0y6zd63pjmdppy3ztj0c6vyg6ek2rh9",
         params=pagOpt,
     )
     assert result is not None
@@ -57,7 +57,7 @@ def test_validators():
     result = terra.staking.validators(_pagOpt)
     assert result is not None
     result = terra.staking.validator(
-        "terravaloper1rdkyl03zd4d2g8hlchf0cmpwty2et4vfdjlaef"
+        "terravaloper17460j07rlktalgkll35zvz0efv60mv79m25hat"
     )
     assert result is not None
 
@@ -65,7 +65,7 @@ def test_validators():
 def test_redelagations():
     _pagOpt = PaginationOptions(limit=1, count_total=True, reverse=False)
     result = terra.staking.redelegations(
-        "terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp", params=_pagOpt
+        "terra1em3qvwh0y6zd63pjmdppy3ztj0c6vyg6ek2rh9", params=_pagOpt
     )
     assert result is not None
     # result = terra.staking.redelegations("terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp",
@@ -84,7 +84,7 @@ def test_redelagations():
 
 def test_bonded_validators():
     result = terra.staking.bonded_validators(
-        "terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp", pagOpt
+        "terra1em3qvwh0y6zd63pjmdppy3ztj0c6vyg6ek2rh9", pagOpt
     )
     assert result is not None
 

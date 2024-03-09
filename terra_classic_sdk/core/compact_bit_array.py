@@ -20,6 +20,10 @@ class CompactBitArray(JSONSerializable):
     elems: bytearray = attr.ib(converter=bytearray)
 
     @classmethod
+    def from_amino(cls, data: dict) -> CompactBitArray:
+        return cls(data["extra_bits_stored"], bytearray(base64.b64decode(data["elems"])))
+
+    @classmethod
     def from_data(cls, data: dict) -> CompactBitArray:
         return cls(data["extra_bits_stored"], bytearray(base64.b64decode(data["elems"])))
 

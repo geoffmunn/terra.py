@@ -56,9 +56,9 @@ class MsgSend(Msg):
     @classmethod
     def from_data(cls, data: dict) -> MsgSend:
         return cls(
-            from_address=data['value']["from_address"],
-            to_address=data['value']["to_address"],
-            amount=Coins.from_data(data['value']["amount"]),
+            from_address=data["from_address"],
+            to_address=data["to_address"],
+            amount=Coins.from_data(data["amount"]),
         )
 
     def to_data(self) -> dict:

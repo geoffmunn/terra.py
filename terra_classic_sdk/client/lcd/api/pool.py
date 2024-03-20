@@ -58,7 +58,7 @@ class AsyncPoolAPI(BaseAsyncAPI):
         pool_list:list = []
 
         # This is the default pagination object
-        pagOpt:PaginationOptions = PaginationOptions(limit = 100, count_total = True)
+        pagOpt:PaginationOptions = PaginationOptions(limit = 500, count_total = True)
 
         # Go and get the first batch of results
         res        = await self._c._get(f"osmosis/gamm/v1beta1/pools", params = pagOpt)

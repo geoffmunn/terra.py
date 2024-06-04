@@ -5,17 +5,17 @@ from __future__ import annotations
 import attr
 from betterproto.lib.google.protobuf import Any as Any_pb
 from terra_proto.cosmos.distribution.v1beta1 import (
-    CommunityPoolSpendProposal as CommunityPoolSpendProposal_pb,
+    MsgCommunityPoolSpend as MsgCommunityPoolSpend_pb,
 )
 
 from terra_classic_sdk.core import AccAddress, Coins
 from terra_classic_sdk.util.json import JSONSerializable
 
-__all__ = ["CommunityPoolSpendProposal"]
+__all__ = ["MsgCommunityPoolSpend"]
 
 
 @attr.s
-class CommunityPoolSpendProposal(JSONSerializable):
+class MsgCommunityPoolSpend(JSONSerializable):
     """Proposal for allocating funds from the community pool to an address.
 
     Args:
@@ -25,9 +25,11 @@ class CommunityPoolSpendProposal(JSONSerializable):
         amount (Coins): amount to spend from community pool
     """
 
-    type_amino = "distribution/CommunityPoolSpendProposal"
+    type_amino = "distribution/MsgCommunityPoolSpend"
     """"""
-    type_url = "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal"
+    type_url = "/cosmos.distribution.v1beta1.MsgCommunityPoolSpend"
+    """"""
+    prototype = MsgCommunityPoolSpend_pb
     """"""
 
     title: str = attr.ib()
@@ -47,7 +49,7 @@ class CommunityPoolSpendProposal(JSONSerializable):
         }
 
     @classmethod
-    def from_data(cls, data: dict) -> CommunityPoolSpendProposal:
+    def from_data(cls, data: dict) -> MsgCommunityPoolSpend:
         return cls(
             title=data["title"],
             description=data["description"],
@@ -64,8 +66,8 @@ class CommunityPoolSpendProposal(JSONSerializable):
             "amount": self.amount.to_data(),
         }
 
-    def to_proto(self) -> CommunityPoolSpendProposal_pb:
-        return CommunityPoolSpendProposal_pb(
+    def to_proto(self) -> MsgCommunityPoolSpend_pb:
+        return MsgCommunityPoolSpend_pb(
             title=self.title,
             description=self.description,
             recipient=self.recipient,
@@ -73,7 +75,7 @@ class CommunityPoolSpendProposal(JSONSerializable):
         )
 
     @classmethod
-    def from_proto(cls, proto: CommunityPoolSpendProposal_pb) -> CommunityPoolSpendProposal:
+    def from_proto(cls, proto: MsgCommunityPoolSpend_pb) -> MsgCommunityPoolSpend:
         return cls(
             title=proto.title,
             description=proto.description,

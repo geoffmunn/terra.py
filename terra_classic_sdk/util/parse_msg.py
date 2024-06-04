@@ -8,6 +8,7 @@ from terra_classic_sdk.core.authz import (
 )
 from terra_classic_sdk.core.bank import MsgMultiSend, MsgSend
 from terra_classic_sdk.core.distribution import (
+    MsgCommunityPoolSpend,
     MsgFundCommunityPool,
     MsgSetWithdrawAddress,
     MsgWithdrawDelegatorReward,
@@ -75,6 +76,7 @@ from terra_classic_sdk.core.osmosis import (
 
 bank_msgs = [MsgSend, MsgMultiSend]
 distribution_msgs = [
+    MsgCommunityPoolSpend,
     MsgFundCommunityPool,
     MsgSetWithdrawAddress,
     MsgWithdrawDelegatorReward,

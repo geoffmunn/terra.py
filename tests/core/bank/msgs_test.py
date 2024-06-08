@@ -3,7 +3,7 @@ from terra_classic_sdk.core.bank import MsgMultiSend, MsgSend
 
 def test_deserializes_msg_send(load_msg_examples):
     data = {
-        "type": "bank/MsgSend",
+        '@type': '/cosmos.bank.v1beta1.MsgSend',
         "value": {
             "from_address": "terra1y4umfuqfg76t8mfcff6zzx7elvy93jtp4xcdvw",
             "to_address": "terra1v9ku44wycfnsucez6fp085f5fsksp47u9x8jr4",
@@ -30,7 +30,7 @@ def test_msg_multi_send_io():
 
 def test_deserializes_msg_multi_send(load_msg_examples):
     data = {
-        "type": "bank/MsgMultiSend",
+        '@type': '/cosmos.bank.v1beta1.MsgMultiSend',
         "value": {
             "inputs": [
                 {

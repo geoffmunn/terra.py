@@ -13,6 +13,12 @@ class Msg(BaseTerraData):
         return Any_pb(type_url=self.type_url, value=bytes(self.to_proto()))
 
     @staticmethod
+    def from_amino(data: dict) -> Msg:
+        from terra_classic_sdk.util.parse_msg import parse_msg
+
+        return parse_msg(data)
+    
+    @staticmethod
     def from_data(data: dict) -> Msg:
         from terra_classic_sdk.util.parse_msg import parse_msg
 

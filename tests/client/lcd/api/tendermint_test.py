@@ -12,7 +12,7 @@ def test_validator_set():
 
 
 def test_validator_set_with_height():
-    result = terra.tendermint.validator_set(6740000)
+    result = terra.tendermint.validator_set(14513401)
     print(result)
 
 
@@ -27,7 +27,7 @@ def test_block_info():
 
 
 def test_block_info_with_height():
-    result = terra.tendermint.block_info(6740000)
+    result = terra.tendermint.block_info(14513401)
     print(result)
 
 

@@ -14,6 +14,11 @@ class BaseTerraData(JSONSerializable, Message):
     type: str
     type_url: str
 
+    def to_amino(self) -> dict:
+        data = dict_to_data(attr.asdict(self))
+        data.update({"@type": self.type_url})
+        return data
+    
     def to_data(self) -> dict:
         data = dict_to_data(attr.asdict(self))
         data.update({"@type": self.type_url})

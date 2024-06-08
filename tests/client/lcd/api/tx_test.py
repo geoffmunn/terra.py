@@ -11,7 +11,7 @@ pagOpt = PaginationOptions(limit=2, count_total=True)
 
 def test_tx_info():
     result = terra.tx.tx_info(
-        "7AB5550F54A1B6B8A480C6B870DFFB1E94D6DB7579F9620E4172525476B8BBA2"
+        "A247772DC239530F9F1198A6ECFBD2C1856BA4E35EC68D3BE962461952059AC8"
     )
     assert result is not None
 
@@ -19,8 +19,8 @@ def test_tx_info():
 def test_search():
     result = terra.tx.search(
         [
-            ("tx.height", 7549440),
-            ("message.sender", "terra1x46rqay4d3cssq8gxxvqz8xt6nwlz4td20k38v"),
+            ("tx.height", 16771543),
+            ("message.sender", "terra1em3qvwh0y6zd63pjmdppy3ztj0c6vyg6ek2rh9"),
         ]
     )
     assert result is not None
@@ -33,5 +33,5 @@ def test_tx_infos_by_height():
 
 
 def test_tx_infos_by_height_with_height():
-    result = terra.tx.tx_infos_by_height(7549440)
+    result = terra.tx.tx_infos_by_height(16771543)
     assert result is not None

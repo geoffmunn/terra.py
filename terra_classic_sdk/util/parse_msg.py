@@ -8,6 +8,7 @@ from terra_classic_sdk.core.authz import (
 )
 from terra_classic_sdk.core.bank import MsgMultiSend, MsgSend
 from terra_classic_sdk.core.distribution import (
+    MsgCommunityPoolSpend,
     MsgFundCommunityPool,
     MsgSetWithdrawAddress,
     MsgWithdrawDelegatorReward,
@@ -69,11 +70,13 @@ from terra_classic_sdk.core.osmosis import (
     MsgExitPool,
     MsgJoinPool,
     MsgSwapExactAmountIn,
+    MsgSwapExactAmountOut,
     MsgJoinSwapExternAmountIn
 )
 
 bank_msgs = [MsgSend, MsgMultiSend]
 distribution_msgs = [
+    MsgCommunityPoolSpend,
     MsgFundCommunityPool,
     MsgSetWithdrawAddress,
     MsgWithdrawDelegatorReward,
@@ -142,6 +145,7 @@ osmosis_msgs = [
     MsgJoinPool,
     MsgJoinSwapExternAmountIn,
     MsgSwapExactAmountIn,
+    MsgSwapExactAmountOut
 ]
 
 parse_msg = create_demux(

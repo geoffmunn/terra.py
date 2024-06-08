@@ -154,7 +154,7 @@ class AsyncTxAPI(BaseAsyncAPI):
             Tx: unsigned tx
         """
 
-        opt = copy.deepcopy(options)
+        opt = copy.copy(options)
 
         signer_data: List[SignerData] = []
         for signer in signers:
@@ -215,7 +215,7 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         gas = options.gas
         if gas is None or gas == "auto" or int(gas) == 0:
-            opt = copy.deepcopy(options)
+            opt = copy.copy(options)
             opt.gas_adjustment = gas_adjustment
             gas = str(await super()._try_await(self.estimate_gas(tx, opt)))
 

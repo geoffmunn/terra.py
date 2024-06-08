@@ -93,8 +93,8 @@ class Commission(JSONSerializable):
     @classmethod
     def from_data(cls, data: dict) -> Commission:
         
-        # The date needs to be formatted as a string. Add extra timezone details if required
-        date:str = parser.parse(data['update_time']).strftime('%Y-%m-%d %H-%M-%S')
+        # The date needs to be formatted as a string.
+        date:str = parser.parse(data['update_time']).strftime('%Y-%m-%d %H:%M:%S.%fZ')
         
         return cls(
             commission_rates=CommissionRates.from_data(data["commission_rates"]),
@@ -218,6 +218,21 @@ class Validator(JSONSerializable):
             "commission": self.commission.to_amino(),
             "min_self_delegation": str(self.min_self_delegation),
         }
+    
+    def to_data(self) -> dict:
+        return {
+            "operator_address": self.operator_address,
+            "consensus_pubkey": self.consensus_pubkey,
+            "jailed": self.jailed,
+            "status": self.status,
+            "tokens": str(self.tokens),
+            "delegator_shares": str(self.delegator_shares),
+            "description": self.description.to_amino(),
+            "unbonding_height": str(self.unbonding_height),
+            "unbonding_time": to_isoformat(self.unbonding_time),
+            "commission": self.commission.to_amino(),
+            "min_self_delegation": str(self.min_self_delegation)
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> Validator:
@@ -225,7 +240,7 @@ class Validator(JSONSerializable):
             operator_address=data["operator_address"],
             consensus_pubkey=data["consensus_pubkey"],
             jailed=data.get("jailed"),
-            status=BondStatus.from_string(data["status"]),
+            status= BondStatus[data.get("status")],
             tokens=data["tokens"],
             delegator_shares=data["delegator_shares"],
             description=Description.from_data(data["description"]),

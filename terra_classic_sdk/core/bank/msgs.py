@@ -64,9 +64,11 @@ class MsgSend(Msg):
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
-            "from_address": self.from_address,
-            "to_address": self.to_address,
-            "amount": self.amount.to_data(),
+            "value": {
+                "from_address": self.from_address,
+                "to_address": self.to_address,
+                "amount": self.amount.to_data(),
+            }
         }
 
     @classmethod
@@ -198,7 +200,7 @@ class MsgMultiSend(Msg):
 
     def to_amino(self) -> dict:
         return {
-            "type": self.type_amino,
+            "@type": self.type_amino,
             "value": {
                 "inputs": [mi.to_amino() for mi in self.inputs],
                 "outputs": [mo.to_amino() for mo in self.outputs],
@@ -208,15 +210,17 @@ class MsgMultiSend(Msg):
     def to_data(self) -> dict:
         return {
             "@type": self.type_url,
-            "inputs": [mi.to_data() for mi in self.inputs],
-            "outputs": [mo.to_data() for mo in self.outputs],
+            "value": {
+                "inputs": [mi.to_data() for mi in self.inputs],
+                "outputs": [mo.to_data() for mo in self.outputs],
+            }
         }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgMultiSend:
         return cls(
-            inputs=[MultiSendInput.from_data(x) for x in data["inputs"]],
-            outputs=[MultiSendOutput.from_data(x) for x in data["outputs"]],
+            inputs=[MultiSendInput.from_data(x) for x in data['value']["inputs"]],
+            outputs=[MultiSendOutput.from_data(x) for x in data['value']["outputs"]],
         )
 
     @classmethod

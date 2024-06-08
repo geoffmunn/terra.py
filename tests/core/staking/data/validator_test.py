@@ -17,14 +17,14 @@ def test_deserializes():
             "security_contact": "",
         },
         "unbonding_height": "0",
-        "unbonding_time": "1970-01-01T00:00:00Z",
+        "unbonding_time": "1970-01-01T00:00:00.000000Z",
         "commission": {
             "commission_rates": {
                 "rate": "0.200000000000000000",
                 "max_rate": "0.250000000000000000",
                 "max_change_rate": "0.010000000000000000",
             },
-            "update_time": "2019-12-01T03:28:34.024363013Z",
+            "update_time": "2019-12-01T03:28:34.024363Z",
         },
         "min_self_delegation": "1",
     }

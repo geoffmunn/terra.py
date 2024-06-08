@@ -90,11 +90,11 @@ class SendAuthorization(Authorization):
         }
 
     def to_data(self) -> dict:
-        return {"@type": self.type_url, "spend_limit": self.spend_limit.to_data()}
+        return {"@type": self.type_url, "value": {"spend_limit": self.spend_limit.to_data()}}
 
     @classmethod
     def from_data(cls, data: dict) -> SendAuthorization:
-        return cls(spend_limit=Coins.from_data(data["spend_limit"]))
+        return cls(spend_limit=Coins.from_data(data['value']["spend_limit"]))
 
     def to_proto(self) -> SendAuthorization_pb:
         return SendAuthorization_pb(spend_limit=self.spend_limit.to_proto())
@@ -132,11 +132,11 @@ class GenericAuthorization(Authorization):
         return {"type": self.type_amino, "value": {"msg": self.msg}}
 
     def to_data(self) -> dict:
-        return {"@type": self.type_url, "msg": self.msg}
+        return {"@type": self.type_url, "value": {"msg": self.msg}}
 
     @classmethod
     def from_data(cls, data: dict) -> GenericAuthorization:
-        return cls(msg=data["msg"])
+        return cls(msg=data['value']["msg"])
 
     def to_proto(self) -> GenericAuthorization_pb:
         return GenericAuthorization_pb(msg=self.msg)

@@ -19,42 +19,42 @@ def test_proposals_with_pagination():
 
 
 def test_proposal():
-    result = terra.gov.proposal(5368)
+    result = terra.gov.proposal(12073)
     assert result is not None
 
 
-# public lcd requires tx.height
-# def test_proposer():
-#     result = terra.gov.proposer(5368)
-#     assert(result is not None)
+#public lcd requires tx.height
+def test_proposer():
+    result = terra.gov.proposer(12087)
+    assert(result is not None)
 
 
-# public lcd requires tx.height
-# def test_deposits():
-#    result = terra.gov.deposits(5368)
-#    assert(result is not None)
+#public lcd requires tx.height
+def test_deposits():
+   result = terra.gov.deposits(12073)
+   assert(result is not None)
 
 
-# public lcd requires tx.height
-# def test_deposits_with_pagination():
-#     result = terra.gov.deposits(5368, params=pagOpt)
-#     assert(result is not None)
+#public lcd requires tx.height
+def test_deposits_with_pagination():
+    result = terra.gov.deposits(12087, params=pagOpt)
+    assert(result is not None)
 
 
-# public lcd requires tx.height
-# def test_votes():
-#     result = terra.gov.votes(5368)
-#     assert(result is not None)
+#public lcd requires tx.height
+def test_votes():
+    result = terra.gov.votes(12073)
+    assert(result is not None)
 
 
-# public lcd requires tx.height
-# def test_votes_with_pagination():
-#     result = terra.gov.votes(5368, pagOpt)
-#     assert(result is not None)
+#public lcd requires tx.height
+def test_votes_with_pagination():
+    result = terra.gov.votes(12073, pagOpt)
+    assert(result is not None)
 
 
 def test_tally():
-    result = terra.gov.tally(5368)
+    result = terra.gov.tally(12073)
     assert result is not None
 
 

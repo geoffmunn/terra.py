@@ -14,12 +14,12 @@ classifiers = [
 description = "The Python SDK for Terra Classic"
 documentation = "https://terra-money.github.io/terra.py/index.html"
 homepage = "https://github.com/geoffmunn/terra.py"
-keywords = ["blockchain", "terra", "terra classic", "lunc", "crypto", "luna classic", "osmosis", "crypto sdk", "blockchain sdk"]
+keywords = ["blockchain", "terra", "terra classic", "lunc", "crypto", "luna classic", "luna classic sdk", "lunc sdk", "osmosis", "crypto sdk", "blockchain sdk"]
 license = "MIT"
 packages = [{ include = "terra_classic_sdk" }]
 readme = "README.md"
 repository = "https://github.com/terra-money/terra.py"
-version = "2.1.4"
+version = "3.0.0b3"
 
 [tool.poetry.dependencies]
 aiohttp = "^3.9.1"
@@ -32,7 +32,7 @@ protobuf = "^4.25.1"
 betterproto = "2.0.0b4"
 furl = "^2.1.3"
 boltons = "^23.1.1"
-terra-classic-proto = "^3.1.0"
+terra-classic-proto = "^3.1.2"
 nest-asyncio = "^1.5.8"
 attrs = "^23.1.0"
 wrapt = "^1.16.0"

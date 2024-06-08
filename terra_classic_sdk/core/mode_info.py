@@ -28,12 +28,28 @@ class ModeInfo(JSONSerializable):
     single: Optional[ModeInfoSingle] = attr.ib(default=None)
     multi: Optional[ModeInfoMulti] = attr.ib(default=None)
 
+    def to_amino(self) -> dict:
+        if self.single:
+            return {"single": self.single.to_data()}
+        if self.multi:
+            return {"multi": self.multi.to_data()}
+        raise ValueError("ModeInfo should have one of single or multi")
+    
     def to_data(self) -> dict:
         if self.single:
             return {"single": self.single.to_data()}
         if self.multi:
             return {"multi": self.multi.to_data()}
         raise ValueError("ModeInfo should have one of single or multi")
+
+    @classmethod
+    def from_amino(cls, data: dict) -> ModeInfo:
+        if data.get("single"):
+            return cls(single=ModeInfoSingle.from_amino(data.get("single")))
+        if data.get("multi"):
+            return cls(multi=ModeInfoMulti.from_amino(data.get("multi")))
+        raise ValueError("ModeInfo should have one of single or multi")
+
 
     @classmethod
     def from_data(cls, data: dict) -> ModeInfo:
@@ -61,9 +77,16 @@ class ModeInfo(JSONSerializable):
 class ModeInfoSingle(JSONSerializable):
     mode: SignMode = attr.ib()
 
+    def to_amino(self) -> dict:
+        return {"mode": self.mode}
+
     def to_data(self) -> dict:
         return {"mode": self.mode}
 
+    @classmethod
+    def from_amino(cls, data: dict) -> ModeInfoSingle:
+        return cls(data["mode"])
+    
     @classmethod
     def from_data(cls, data: dict) -> ModeInfoSingle:
         return cls(data["mode"])
@@ -82,6 +105,13 @@ class ModeInfoMulti(JSONSerializable):
     bitarray: CompactBitArray = attr.ib()
     mode_infos: List[ModeInfo] = attr.ib()
 
+    @classmethod
+    def from_amino(cls, data: dict) -> ModeInfoMulti:
+        return cls(
+            CompactBitArray.from_amino(data["bitarray"]),
+            [ModeInfo.from_amino(d) for d in data["mode_infos"]],
+        )
+    
     @classmethod
     def from_data(cls, data: dict) -> ModeInfoMulti:
         return cls(

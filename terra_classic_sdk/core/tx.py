@@ -68,6 +68,13 @@ class Tx(JSONSerializable):
     auth_info: AuthInfo = attr.ib()
     signatures: List[bytes] = attr.ib(converter=list)
 
+    def to_amino(self) -> dict:
+        return {
+            "body": self.body.to_amino(),
+            "auth_info": self.auth_info.to_amino(),
+            "signatures": [base64.b64encode(sig).decode('ascii') for sig in self.signatures],
+        }
+    
     def to_data(self) -> dict:
         return {
             "body": self.body.to_data(),
@@ -83,13 +90,22 @@ class Tx(JSONSerializable):
         )
 
     @classmethod
+    def from_amino(cls, data:dict) -> Tx:
+        print (data)
+        return cls(
+            TxBody.from_amino(data["body"]),
+            AuthInfo.from_amino(data["auth_info"]),
+            [base64.b64decode(sig) for sig in data["signatures"]],
+        )
+    
+    @classmethod
     def from_data(cls, data: dict) -> Tx:
         return cls(
             TxBody.from_data(data["body"]),
             AuthInfo.from_data(data["auth_info"]),
             [base64.b64decode(sig) for sig in data["signatures"]],
         )
-
+    
     @classmethod
     def from_proto(cls, proto: Tx_pb) -> Tx:
         return cls(
@@ -165,6 +181,13 @@ class TxBody(JSONSerializable):
     memo: Optional[str] = attr.ib(default="")
     timeout_height: Optional[int] = attr.ib(default=None)
 
+    def to_amino(self) -> dict:
+        return {
+            "messages": [m.to_amino() for m in self.messages],
+            "memo": self.memo if self.memo else "",
+            "timeout_height": self.timeout_height if self.timeout_height else "0",
+        }
+    
     def to_data(self) -> dict:
         return {
             "messages": [m.to_data() for m in self.messages],
@@ -179,6 +202,14 @@ class TxBody(JSONSerializable):
             timeout_height=self.timeout_height,
         )
 
+    @classmethod
+    def from_amino(cls, data:dict) -> TxBody:
+        return cls(
+            [Msg.from_amino(m) for m in data["messages"]],
+            data["memo"],
+            data["timeout_height"],
+        )
+    
     @classmethod
     def from_data(cls, data: dict) -> TxBody:
         return cls(
@@ -208,6 +239,12 @@ class AuthInfo(JSONSerializable):
     signer_infos: List[SignerInfo] = attr.ib(converter=list)
     fee: Fee = attr.ib()
 
+    def to_amino(self) -> dict:
+        return {
+            "signer_infos": [si.to_amino() for si in self.signer_infos],
+            "fee": self.fee.to_amino(),
+        }
+    
     def to_dict(self, casing, include_default_values) -> dict:
         return self.to_proto().to_dict(casing, include_default_values)
 
@@ -223,6 +260,13 @@ class AuthInfo(JSONSerializable):
             fee=self.fee.to_proto(),
         )
 
+    @classmethod
+    def from_amino(cls, data: dict) -> AuthInfo:
+        return cls(
+            [SignerInfo.from_amino(m) for m in data["signer_infos"]],
+            Fee.from_amino(data["fee"]),
+        )
+    
     @classmethod
     def from_data(cls, data: dict) -> AuthInfo:
         return cls(
@@ -251,6 +295,13 @@ class SignerInfo(JSONSerializable):
     mode_info: ModeInfo = attr.ib()
     sequence: int = attr.ib(converter=int)
 
+    def to_amino(self) -> dict:
+        return {
+            "public_key": self.public_key.to_amino(),
+            "mode_info": self.mode_info.to_amino(),
+            "sequence": self.sequence,
+        }
+    
     def to_data(self) -> dict:
         return {
             "public_key": self.public_key.to_data(),
@@ -265,6 +316,14 @@ class SignerInfo(JSONSerializable):
             sequence=self.sequence,
         )
 
+    @classmethod
+    def from_amino(cls, data: dict) -> SignerInfo:
+        return cls(
+            public_key=PublicKey.from_amino(data["public_key"]),
+            mode_info=ModeInfo.from_amino(data["mode_info"]),
+            sequence=data["sequence"],
+        )
+    
     @classmethod
     def from_data(cls, data: dict) -> SignerInfo:
         return cls(

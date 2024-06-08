@@ -10,7 +10,7 @@ class AsyncIbcAPI(BaseAsyncAPI):
         Returns:
             List: allowed clients
         """
-        res = await self._c._get("/ibc/client/v1/params")
+        res = await self._c._get("/ibc/core/client/v1/params")
         return res["params"]
 
     # TODO: functions for clients, connections and channels

@@ -44,13 +44,23 @@ class MsgSwap(Msg):
                 "ask_denom": self.ask_denom,
             },
         }
+    
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "value": {
+                "trader": self.trader,
+                "offer_coin": self.offer_coin.to_data(),
+                "ask_denom": self.ask_denom,
+            },
+        }
 
     @classmethod
     def from_data(cls, data: dict) -> MsgSwap:
         return cls(
-            trader=data["trader"],
-            offer_coin=Coin.from_data(data["offer_coin"]),
-            ask_denom=data["ask_denom"],
+            trader=data['value']['trader'],
+            offer_coin=Coin.from_data(data['value']['offer_coin']),
+            ask_denom=data['value']['ask_denom'],
         )
 
     def to_proto(self) -> MsgSwap_pb:
@@ -114,6 +124,17 @@ class MsgSwapSend(Msg):
             ask_denom=data["ask_denom"],
         )
 
+    def to_data(self) -> dict:
+        return {
+            "@type": self.type_url,
+            "value": {
+                "from_address": self.from_address,
+                "to_address": self.to_address,
+                "offer_coin": self.offer_coin.to_amino(),
+                "ask_denom": self.ask_denom,
+            },
+        }
+    
     def to_proto(self) -> MsgSwapSend_pb:
         return MsgSwapSend_pb(
             from_address=self.from_address,

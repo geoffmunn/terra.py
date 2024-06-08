@@ -353,8 +353,8 @@ class MigrateContractProposal(JSONSerializable):
             title=data["title"],
             description=data["description"],
             contract=data["contract"],
-            new_code_id=data["new_code_id"],
-            migrate_msg=parse_msg(data["migrate_msg"]),
+            new_code_id=data["code_id"],
+            migrate_msg=parse_msg(data["msg"]),
         )
 
     @classmethod

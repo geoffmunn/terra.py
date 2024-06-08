@@ -69,6 +69,16 @@ class Delegation(JSONSerializable):
             balance=Coin.from_data(data["balance"]),
         )
 
+    def to_data(self) -> dict:
+        return {
+            "delegation": {
+                "delegator_address": self.delegation.delegator_address,
+                "validator_address": self.delegation.validator_address,
+                "shares": str(self.delegation.shares),
+            },
+            "balance": self.balance.to_data(),
+        }
+    
     def to_proto(self) -> DelegationResponse_pb:
         return DelegationResponse_pb(
             delegation=Delegation_pb(
@@ -113,7 +123,7 @@ class UnbondingDelegationEntry(JSONSerializable):
     def from_data(cls, data: dict) -> UnbondingDelegationEntry:
        
         # The date needs to be formatted as a string. Add extra timezone details if required
-        date:str = parser.parse(data['completion_time']).strftime('%Y-%m-%d %H-%M-%S')
+        date:str = parser.parse(data['completion_time']).strftime('%Y-%m-%d %H:%M:%S.%fZ')
         
         return cls(
             initial_balance=data["initial_balance"],
@@ -160,13 +170,19 @@ class UnbondingDelegation(JSONSerializable):
             entries=entries,
         )
 
+    def to_data(self) -> dict:
+        return {
+            "delegator_address": self.delegator_address,
+            "validator_address": self.validator_address,
+            "entries": [entry.to_data() for entry in self.entries],
+        }
+    
     def to_proto(self) -> UnbondingDelegation_pb:
         return UnbondingDelegation_pb(
             delegator_address=self.delegator_address,
             validator_address=self.validator_address,
             entries=[entry.to_proto() for entry in self.entries],
         )
-
 
 @attr.s
 class RedelegationEntryInfo(JSONSerializable):
@@ -234,7 +250,7 @@ class RedelegationEntry(JSONSerializable):
                 "initial_balance": str(self.redelegation_entry.initial_balance),
                 "shares_dst": str(self.redelegation_entry.shares_dst),
                 "creation_height": self.redelegation_entry.creation_height,
-                "completion_time": self.redelegation_entry.completion_time,
+                "completion_time": to_isoformat(self.redelegation_entry.completion_time),
             },
             "balance": str(self.balance),
         }
@@ -323,6 +339,13 @@ class Redelegation(JSONSerializable):
             ),
             entries=entries,
         )
+    
+    def to_data(self) -> dict:
+        entries = [RedelegationEntry.to_data(re) for re in self.entries]
+        return {
+            "redelegation": self.redelegation.to_data(),
+            "entries": entries
+        }
 
     def to_proto(self) -> Redelegation_pb:
         return Redelegation_pb(

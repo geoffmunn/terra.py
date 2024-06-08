@@ -118,6 +118,15 @@ class Proposal(JSONSerializable):
         else:
             voting_end_time = parser.parse(str(data["voting_end_time"]))
 
+        # This is a botch fix to handle the 0.47 message structure
+        data['@type'] = data['messages'][0]['@type']
+        data['messages'][0]['content'] = {}
+        data['messages'][0]['content']['@type'] = data['@type']
+        data['messages'][0]['content']['title'] = data['title']
+        data['messages'][0]['content']['description'] = data['summary']
+        data['messages'][0]['content']['recipient'] = data['messages'][0]['recipient']
+        data['messages'][0]['content']['amount'] = data['messages'][0]['amount']
+
         return cls(
             proposal_id=data["id"],
             content=parse_content(data['messages'][0]["content"]),

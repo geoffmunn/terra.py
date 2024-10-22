@@ -117,15 +117,18 @@ class Proposal(JSONSerializable):
             voting_end_time = ""
         else:
             voting_end_time = parser.parse(str(data["voting_end_time"]))
-
-        # This is a botch fix to handle the 0.47 message structure
-        data['@type'] = data['messages'][0]['@type']
+        
+        # We need to convert the 0.47 message format into what is expected
+        # This isn't perfect, but for the moment we'll assume all proposals are TextProposals.
+        # @TODO: The 0.47 system doesn't seem to indicate what type of proposal anything is.
+        data['@type'] = '/cosmos.gov.v1beta1.TextProposal'
+        data['messages'].append({})
         data['messages'][0]['content'] = {}
         data['messages'][0]['content']['@type'] = data['@type']
         data['messages'][0]['content']['title'] = data['title']
         data['messages'][0]['content']['description'] = data['summary']
-        data['messages'][0]['content']['recipient'] = data['messages'][0]['recipient']
-        data['messages'][0]['content']['amount'] = data['messages'][0]['amount']
+        #data['messages'][0]['content']['recipient'] = data['messages'][0]['recipient']
+        #data['messages'][0]['content']['amount'] = data['messages'][0]['amount']
 
         return cls(
             proposal_id=data["id"],

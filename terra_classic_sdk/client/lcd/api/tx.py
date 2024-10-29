@@ -345,9 +345,11 @@ class AsyncTxAPI(BaseAsyncAPI):
 
         for event in events:
             if event[0] == "tx.height":
-                actual_params.add("events", f"{event[0]}={event[1]}")
+                actual_params.add("query", f"{event[0]}={event[1]}")
+                actual_params.add("events", f"{event[0]}={event[1]}") # Deprecated with 0.47, can be removed at a later point
             else:
-                actual_params.add("events", f"{event[0]}='{event[1]}'")
+                actual_params.add("query", f"{event[0]}='{event[1]}'")
+                actual_params.add("events", f"{event[0]}='{event[1]}'") # Deprecated with 0.47, can be removed at a later point
         if params:
             for p in params:
                 actual_params.add(p, params[p])

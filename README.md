@@ -32,6 +32,9 @@ The Terra Classic Software Development Kit (SDK) in Python is a simple library t
 
 ## Recent changes
 
+### 3.0.2
+- Fixes for governance voting and other minor issues with the 0.47 chain upgrade
+
 ### 3.0.0
 - Compatibility with terra.proto 4.0.0. This is backward compatible with terra.proto 3.1.2, but going forward will be built and tested against the newest version of the Cosmos SDK.
 

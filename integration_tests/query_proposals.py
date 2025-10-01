@@ -2,7 +2,7 @@ from terra_classic_sdk.client.lcd import LCDClient, PaginationOptions
 from terra_classic_sdk.client.lcd.api.gov import ProposalStatus
 
 terra = LCDClient(
-    url="https://lcd.terra.dev/",
+    url="https://terra-classic-lcd.publicnode.com/",
     chain_id="columbus-5",
 )
 
